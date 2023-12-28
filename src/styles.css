@@ -1,4 +1,5 @@
 @import "@fontsource/inria-sans";
+@import "@fontsource/inria-sans/300.css";
 
 @tailwind base;
 @tailwind components;
@@ -13,6 +14,9 @@
   color: #FFF;
   background-color: rgba(25,30,50,0.98);
   border-radius:15px;
+
+  border: 1px solid rgba(240,240,240,0.2);
+  height:100%;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

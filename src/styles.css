@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -6,8 +10,7 @@
 
   color: #FFF;
   background-color: rgba(25,30,50,0.98);
-  border-radius:20px;
-  padding:30px;
+  border-radius:15px;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

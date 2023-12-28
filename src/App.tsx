@@ -1,23 +1,11 @@
-import { createSignal } from "solid-js";
-import { invoke } from "@tauri-apps/api/tauri";
-import { A } from "solid-router";
 import "./App.css";
 
 function App() {
-  const [greetMsg, setGreetMsg] = createSignal("");
-  const [name, setName] = createSignal("");
-
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-    setGreetMsg(await invoke("greet", { name: name() }));
-  }
-
   return (
     <main>
-        
-        <div class="container">
-          <h1>Goal</h1>
-          <h2>Your Goals</h2>
+        <a href="#" class="close-btn absolute bg-red-400 right-5 top-5 rounded-full w-4 h-4 hover:bg-red-200 transition-colors"></a>
+        <div class="container px-8 py-8 select-none cursor-default">
+          <h1 class="text-4xl font-light text-slate-400">Goal</h1>
         </div>
     </main>
   );

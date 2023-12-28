@@ -12,6 +12,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@fontsource/inria-sans": "^5.0.8",
     "@solidjs/router": "^0.10.5",
     "@tauri-apps/api": "^1.5.2",
     "solid-js": "^1.7.8"

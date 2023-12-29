@@ -4,7 +4,6 @@ import Logo from "./assets/logo.svg";
 import { exit } from '@tauri-apps/api/process';
 import Goal from "./components/Goal";
 
-
 function App() {
   return (
     <main>

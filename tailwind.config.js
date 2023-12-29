@@ -6,6 +6,9 @@ export default {
     ],
     theme: {
         extend: {
+            screens: {
+                'sm': '540px'
+            },
             colors: {
                 soothe: {
                     '50': '#fbfbfa',

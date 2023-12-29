@@ -6,12 +6,13 @@ import Modal from "./components/Modal";
 
 function App() {
     return (
-        <main class="">
+        <main class="flex flex-col h-full">
             <Header />
-            <div class="px-6 select-none cursor-default z-0">
+            <div class="flex-1 px-6 overflow-y-scroll select-none cursor-default z-0">
                 <GoalsView />
             </div>
-            <Modal title="Add a new goal" visible={true} />
+            <Modal title="Add a new goal" visible={false} />
+            <footer class="text-xs text-center text-calm-500/50 px-2 mx-auto mb-4">Made with heart by jacobmellin | Please consider supporting: jacobmellin</footer>
         </main>
     );
 }

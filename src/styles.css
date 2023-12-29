@@ -13,9 +13,6 @@
   font-weight: 400;
 
   color: #FFF;
-  background-color: rgba(25,30,50,0.97);
-  @apply bg-gradient-to-b from-blue-900/30 to-purple-800/30;
-  border-radius:15px;
 
   border: 1px solid rgba(240,240,240,0.2);
   height:100%;
@@ -24,5 +21,10 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%; 
+
+  @apply rounded-2xl;
+
+  background-color: rgba(25,30,50,0.97);
+  @apply bg-gradient-to-b from-blue-900/30 to-purple-800/30;
 }

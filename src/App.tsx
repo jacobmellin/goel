@@ -11,7 +11,7 @@ function App() {
             <div class="px-6 select-none cursor-default z-0">
                 <GoalsView />
             </div>
-            {/* <Modal /> */}
+            <Modal title="Add a new goal" visible={true} />
         </main>
     );
 }

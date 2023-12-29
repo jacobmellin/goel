@@ -1,7 +1,7 @@
 import Goal from "./Goal";
 
 export default function GoalsView() {
-    return <div class="grid md:grid-cols-3 sm:grid-cols-2 gap-6 mt-10">
+    return <div class="grid md:grid-cols-3 sm:grid-cols-2 gap-4 mt-6">
         <Goal trackingInterval="daily" text="This is an example goal" />
         <Goal trackingInterval="monthly" text="This is an example goal" />
         <Goal trackingInterval="weekly" text="This is an example goal" />

@@ -8,10 +8,10 @@ function App() {
     return (
         <main class="">
             <Header />
-            <div class="px-8 select-none cursor-default z-0">
+            <div class="px-6 select-none cursor-default z-0">
                 <GoalsView />
             </div>
-            <Modal />
+            {/* <Modal /> */}
         </main>
     );
 }

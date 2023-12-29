@@ -24,7 +24,7 @@
 
   @apply rounded-2xl;
 
-  background-color: rgba(25,30,50,0.97);
+  background-color: rgba(25,30,50,0.99);
   @apply bg-gradient-to-b from-blue-900/30 to-purple-800/20;
 
   position:absolute;
@@ -42,4 +42,65 @@ body {
 
 #root {
     height: 100%;
+}
+
+.solid-select-container {
+    @apply 
+        text-gaze-300
+        bg-gaze-800
+        rounded
+        relative
+        border
+        border-white/10
+        hover:bg-gaze-700
+        transition-colors
+        focus:border-orange-300
+    ;
+}
+
+.solid-select-control {
+    @apply border-none
+        px-2
+        py-1
+    ;
+}
+
+.solid-select-placeholder {
+    @apply text-gaze-700; 
+}
+
+.solid-select-input {
+    @apply absolute
+           top-0
+           left-0
+           right-0
+           bottom-0
+           bg-transparent
+           px-2
+           py-2
+           ;
+}
+
+.solid-select-list {
+    @apply absolute
+        bg-gaze-800
+        mt-2
+        w-full
+        shadow-md
+        rounded
+        overflow-hidden
+        ;
+}
+
+.solid-select-option {
+    @apply
+        py-1
+        px-2
+        hover:bg-gaze-700
+        focus:bg-gaze-700
+    ;
+}
+
+.solid-select-option[data-focused='true'] {
+    @apply bg-gaze-600;
 }

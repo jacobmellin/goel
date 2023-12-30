@@ -2,7 +2,7 @@ interface ModalProps {
     allowBgClose?: boolean,
     visible?: boolean,
     title: string,
-    children?: any[]
+    children?: any
 }
 
 export default function Modal(props: ModalProps) {

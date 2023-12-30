@@ -7,7 +7,7 @@ import ButtonPrimary from "./ButtonPrimary";
 import SelectInput from "./SelectInput";
 import NumberInput from "./NumberInput";
 import { Show } from "solid-js";
-import { createStore } from "solid-js/store/types/server.js";
+import { createStore } from "solid-js/store";
 
 interface trackProgressOption {
     name: string,

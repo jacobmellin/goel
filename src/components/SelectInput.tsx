@@ -1,12 +1,19 @@
 import { Select } from "@thisbeyond/solid-select"
 
 interface SelectInputProps {
-    options: string[]
+    options: any,
+    format: any,
+    onChange: any
+    label?: string
 }
 
 export default function SelectInput(props: SelectInputProps) {
     return <div>
-        <div class="text-gaze-400 mb-1 left-0.5 relative text-sm font-bold">Remind / Track Progress</div>
-        <Select options={props.options} />
+        <div class="text-gaze-400 mb-1 left-0.5 relative text-sm font-bold">{props.label}</div>
+        <Select 
+            options={props.options}
+            format={props.format}
+            onChange={props.onChange}
+        />
     </div>;
 }

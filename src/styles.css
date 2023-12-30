@@ -112,3 +112,13 @@ body {
 .solid-select-container:has(.solid-select-input:focus) {
     @apply border-orange-300;
 }
+
+input[type="number"] {
+  -webkit-appearance: textfield;
+     -moz-appearance: textfield;
+          appearance: textfield;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none;
+}

@@ -36,6 +36,10 @@
   box-shadow: 0 2px 7px rgba(0,0,0,0.5);
 }
 
+button:focus {
+    @apply outline-orange-300;
+}
+
 body {
     height: 100%;
 }
@@ -103,4 +107,8 @@ body {
 
 .solid-select-option[data-focused='true'] {
     @apply bg-gaze-600;
+}
+
+.solid-select-container:has(.solid-select-input:focus) {
+    @apply border-orange-300;
 }

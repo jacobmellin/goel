@@ -14,6 +14,7 @@ function App() {
             <Header />
             <div class="flex-1 px-6 overflow-y-scroll select-none cursor-default z-0">
                 <GoalsView 
+                    disabled={showAddGoalModal()}
                     addGoalClicked={() => setShowAddGoalModal(true)}
                     />
             </div>

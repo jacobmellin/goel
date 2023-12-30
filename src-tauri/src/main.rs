@@ -1,9 +1,12 @@
 // Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+mod db;
+
 #[tauri::command]
 fn get_goals() -> String {
-    format!("This will contain all the goals. yay!")
+    let goals = db::get_goals();
+    serde_json::to_string(&goals).unwrap()
 }
 
 #[tauri::command]

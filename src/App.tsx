@@ -1,4 +1,5 @@
-import { createSignal } from "solid-js";
+import { createResource, createSignal } from "solid-js";
+import { invoke } from '@tauri-apps/api';
 
 import "./App.css";
 
@@ -7,8 +8,15 @@ import GoalsView from "./components/GoalsView";
 import Header from "./components/Header";
 import InfoModal from "./components/InfoModal";
 
+import { GoalRecord } from "./types/Goal";
+
 function App() {
     const [showAddGoalModal, setShowAddGoalModal] = createSignal(false);
+
+    const [goals] = createResource<GoalRecord[]>(async () => {
+        const goals: string = await invoke('get_goals');
+        return JSON.parse(goals);
+    });
 
     return (
         <main class="flex flex-col h-full">
@@ -16,6 +24,7 @@ function App() {
             <div class="flex-1 px-6 overflow-y-scroll select-none cursor-default z-0">
                 <GoalsView 
                     disabled={showAddGoalModal()}
+                    goals={goals()}
                     addGoalClicked={() => setShowAddGoalModal(true)}
                     />
             </div>

@@ -9,16 +9,22 @@ import NumberInput from "./NumberInput";
 import { Show } from "solid-js";
 import { createStore } from "solid-js/store/types/server.js";
 
+interface trackProgressOption {
+    name: string,
+    label: string,
+    selectedLabel?: string
+}
+
 export default function AddGoalModal(props: any) {
     const optionsFormat =
         (item: { label: string, name: string, selectedLabel?: string }, type: string) => {
             return (type === "option" ? item.label : item.selectedLabel || item.label);
         }
 
-    const [trackProgressValue, setTrackProgressValue] = createSignal({});
-    const [trackProgressOpts, _] = createStore(
+    const [trackProgressValue, setTrackProgressValue] = createSignal<trackProgressOption>();
+    const [trackProgressOpts, _] = createStore<Array<trackProgressOption>>(
         [
-            { name: "daily", label: "Daily", selected: true },
+            { name: "daily", label: "Daily", },
             { name: "weekly", label: "Weekly" },
             { name: "monthly", label: "Monthly" },
             {
@@ -30,7 +36,7 @@ export default function AddGoalModal(props: any) {
     );
 
     return <Modal visible={props.visible} title="Add a new goal">
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
             <div class="my-4">
                 <TextInput required label="Goal Description" placeholder="Enter your goal here" />
             </div>
@@ -42,7 +48,7 @@ export default function AddGoalModal(props: any) {
                         format={optionsFormat} options={trackProgressOpts}               onChange={setTrackProgressValue}
                     />
                 </div>
-                <Show when={trackProgressValue().name === 'every'}>
+                <Show when={trackProgressValue()?.name === 'every'}>
                     <div class="grow max-w-32">
                         <NumberInput default={3} min={2} max={365} label="Number of Days" />
                     </div>

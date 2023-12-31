@@ -6,12 +6,14 @@ import "./App.css";
 import AddGoalModal from "./components/AddGoalModal";
 import GoalsView from "./components/GoalsView";
 import Header from "./components/Header";
-import InfoModal from "./components/InfoModal";
+import { createInfoBar } from "./components/InfoBar";
 
 import { GoalRecord } from "./types/Goal";
 
 function App() {
     const [showAddGoalModal, setShowAddGoalModal] = createSignal(false);
+
+    const [InfoBar, showInfo, showError] = createInfoBar();
 
     const [goals, { refetch }] = createResource<GoalRecord[]>(async () => {
         const goals: string = await invoke("get_goals");
@@ -22,18 +24,19 @@ function App() {
         <main class="flex flex-col h-full">
             <Header />
             <div class="flex-1 px-6 overflow-y-scroll select-none cursor-default z-0">
-                <GoalsView 
+                <GoalsView
                     disabled={showAddGoalModal()}
                     goals={goals()}
                     addGoalClicked={() => setShowAddGoalModal(true)}
-                    />
+                />
             </div>
-            <AddGoalModal 
+            <AddGoalModal
                 visible={showAddGoalModal()}
                 onModalHide={() => setShowAddGoalModal(false)}
-                onGoalAdded={refetch}
-                />
-            <InfoModal>New goal created!</InfoModal>
+                onGoalAdded={() => { refetch(); showInfo("New Goal added!"); }}
+                onGoalAddError={(errorMsg: string) => showError(`Failed to add goal: ${errorMsg}`)}
+            />
+            <InfoBar />
             <footer class="text-xs text-center text-calm-500/50 px-2 mx-auto mb-4">Made with heart by jacobmellin | Please consider supporting: jacobmellin</footer>
         </main>
     );

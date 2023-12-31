@@ -1,4 +1,4 @@
-type TrackingInterval = "daily" | "monthly" | "yearly" | "every";
+type TrackingInterval = "daily" | "weekly" | "monthly" | "yearly" | "every";
 
 interface GoalRecord {
     id: string,

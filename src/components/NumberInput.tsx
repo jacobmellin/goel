@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createSignal, onMount } from "solid-js";
 
 interface TextInputProps {
     label: string,
@@ -6,7 +6,8 @@ interface TextInputProps {
     placeholder?: string,
     default?: number,
     min?: number,
-    max?: number
+    max?: number,
+    onChange: (n: number) => void
 }
 
 export default function TextInput(props: TextInputProps) {
@@ -21,7 +22,12 @@ export default function TextInput(props: TextInputProps) {
         }
         const clamped = Math.min(Math.max(num, props.min || -Infinity), props.max || Infinity);
         setValue(clamped); 
+        props.onChange(value());
     };
+
+    onMount(async() => { 
+        props.onChange(value());
+    });
 
     return <div>
         <div class="text-gaze-400 mb-1 left-0.5 relative text-sm font-bold">{props.label}</div>

@@ -10,8 +10,10 @@ fn get_goals() -> String {
 }
 
 #[tauri::command]
-fn new_goal(goal_raw: &str) -> &str {
-    "id"
+fn new_goal(goal_json: &str) -> Result<String, String> {
+    println!("Goal json {}", goal_json);
+    Ok("added goal!".into())
+    // Err("test error".into())
 }
 
 #[tauri::command]

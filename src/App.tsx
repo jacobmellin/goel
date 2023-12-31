@@ -14,7 +14,7 @@ function App() {
     const [showAddGoalModal, setShowAddGoalModal] = createSignal(false);
 
     const [goals] = createResource<GoalRecord[]>(async () => {
-        const goals: string = await invoke('get_goals');
+        const goals: string = await invoke("get_goals");
         return JSON.parse(goals);
     });
 
@@ -30,7 +30,7 @@ function App() {
             </div>
             <AddGoalModal 
                 visible={showAddGoalModal()}
-                onCancel={() => setShowAddGoalModal(false)}
+                onModalHide={() => setShowAddGoalModal(false)}
                 />
             <InfoModal>New goal created!</InfoModal>
             <footer class="text-xs text-center text-calm-500/50 px-2 mx-auto mb-4">Made with heart by jacobmellin | Please consider supporting: jacobmellin</footer>

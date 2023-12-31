@@ -11,9 +11,21 @@ fn get_goals() -> String {
 
 #[tauri::command]
 fn new_goal(goal_json: &str) -> Result<String, String> {
-    println!("Goal json {}", goal_json);
-    Ok("added goal!".into())
-    // Err("test error".into())
+    let mut new_goal: db::models::GoalNew = 
+        match serde_json::from_str(goal_json) {
+            Ok(goal) => goal,
+            Err(e) => return Err(e.to_string())
+        };
+
+    new_goal.date_created = chrono::Local::now().naive_local();
+    new_goal.id = uuid::Uuid::new_v4().to_string();
+
+    match db::insert_goal(new_goal) {
+        Err(error) => return Err(error.to_string()),
+        Ok(rows) => rows
+    };
+
+    Ok("Success".into())
 }
 
 #[tauri::command]

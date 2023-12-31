@@ -20,6 +20,7 @@ interface TrackProgressOption {
 interface AddGoalModalProps {
     visible: boolean,
     onModalHide: Function,
+    onGoalAdded: Function
 }
 
 const optionsFormat = 
@@ -54,6 +55,7 @@ export default function AddGoalModal(props: AddGoalModalProps) {
         try {
             await invoke("new_goal", { goalJson: JSON.stringify(goalRecord) });
             formRef()?.reset();
+            props.onGoalAdded();
             props.onModalHide();
         } catch(e) {
             console.log(e);

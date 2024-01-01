@@ -18,7 +18,7 @@ export default function GoalsView(props: GoalsViewProps) {
         </div>
         <div class="grid md:grid-cols-3 sm:grid-cols-2 gap-4">
             <For each={props.goals}>{(goal, _) => 
-                <Goal trackingInterval={goal.tracking_freq} days={goal.tracking_days_interval} text={goal.description} />
+                <Goal id={goal.id} trackingInterval={goal.tracking_freq} days={goal.tracking_days_interval} text={goal.description} />
             }</For>
         </div>
     </div>;

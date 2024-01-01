@@ -69,7 +69,7 @@ fn main() {
     tauri::Builder::default()
         .system_tray(tray)
         .on_system_tray_event(|app, event| match event {
-            SystemTrayEvent::LeftClick { tray_id, position, size, .. } => {
+            SystemTrayEvent::LeftClick { .. } => {
                 println!("left click!");
                 todo!("implement left click show action");
             },
@@ -85,6 +85,9 @@ fn main() {
                             window.show().unwrap();
                             item_handle.set_title("Hide").unwrap();
                         }
+                    },
+                    "quit" => {
+                       app.exit(0); 
                     }
                     _ => {}
                 }

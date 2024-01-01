@@ -66,8 +66,6 @@ fn main() {
 
     let tray = SystemTray::new().with_menu(tray_menu);
 
-    todo!("Ensure tray menu Hide/Show is updatet when closing through frontend");
-
     tauri::Builder::default()
         .system_tray(tray)
         .on_system_tray_event(|app, event| match event {

@@ -12,27 +12,56 @@ use schema::goals::dsl::*;
 use diesel::result;
 use diesel::RunQueryDsl;
 
-pub fn establish_connection() -> SqliteConnection {
+fn if_err_to_string<T,U>(result: Result<T,U>) -> Result<T, String> 
+    where U: std::fmt::Display {
+    match result {
+        Ok(T) => Ok(T),
+        Err(T) => Err(T.to_string())
+    }
+}
+
+pub fn establish_connection() -> Result<SqliteConnection, String> {
     dotenv().ok();
     let database_url = env::var("DATABASE_URL")
         .expect("Database URL not set!");
 
-    SqliteConnection::establish(&database_url)
-        .unwrap_or_else(|x| panic!("Error connecting to db: {}", x))
+    if_err_to_string(SqliteConnection::establish(&database_url))
 }
 
-pub fn get_goals() -> Vec<Goal> {
-    let connection = &mut establish_connection();
+pub fn get_goals() -> Result<Vec<Goal>, String> {
+    let connection = &mut establish_connection()?;
 
-    goals.limit(50)
-        .load::<Goal>(connection)
-        .expect("Error loading Goals")
+    let result = goals.limit(50)
+        .load::<Goal>(connection);
+
+    if_err_to_string(result)
 }
 
-pub fn insert_goal(new_goal: GoalNew) -> Result<usize, result::Error> {
-    let connection = &mut establish_connection();
+pub fn get_goal(goal_id: &str) -> Result<Vec<Goal>, String> {
+    let connection = &mut establish_connection()?;
+    let result = goals
+                    .find(goal_id)
+                    .load::<Goal>(connection);
+
+    if_err_to_string(result)
+}
+
+pub fn insert_goal(new_goal: GoalNew) -> Result<usize, String> {
+    let connection = &mut establish_connection()?;
     
-    insert_into(goals)
+    let result = insert_into(goals)
         .values(&new_goal)
-        .execute(connection)
+        .execute(connection);
+
+    if_err_to_string(result)
+}
+
+pub fn set_goal_removed(goal_id: &str, removed: bool) -> Result<usize, String> {
+    let connection = &mut establish_connection()?;
+
+    let result = diesel::update(goals.find(goal_id))
+                .set(is_removed.eq(removed))
+                .execute(connection);
+
+    if_err_to_string(result)
 }

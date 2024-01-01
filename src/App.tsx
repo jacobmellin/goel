@@ -27,6 +27,7 @@ function App() {
                 <GoalsView
                     disabled={showAddGoalModal()}
                     goals={goals()}
+                    onGoalRemoved={refetch}
                     addGoalClicked={() => setShowAddGoalModal(true)}
                 />
             </div>

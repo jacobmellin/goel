@@ -10,8 +10,8 @@ pub struct Goal {
     pub description: String,
     pub tracking_freq: String,
     pub tracking_days_interval: Option<i32>,
-    pub is_active: i32,
-    pub is_removed: i32,
+    pub is_active: bool,
+    pub is_removed: bool,
     pub date_created: NaiveDateTime,
     pub date_modified: Option<NaiveDateTime>
 }

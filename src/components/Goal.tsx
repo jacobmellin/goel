@@ -2,12 +2,14 @@ import TrashIcon from 'eva-icons/outline/svg/trash-outline.svg';
 
 import { TrackingInterval } from '../types/Goal';
 import { createEffect, createSignal } from 'solid-js';
+import { invoke } from '@tauri-apps/api';
 
 interface GoalProps {
     text: string,
     trackingInterval: TrackingInterval,
     days?: number,
-    id: string
+    id: string,
+    onGoalRemoved: Function
 }
 
 function Goal(props: GoalProps) {
@@ -18,9 +20,17 @@ function Goal(props: GoalProps) {
             `Every ${props.days} days` : props.trackingInterval);
     });
 
-    const handleDelete = (e) => {
-
-    }
+    const deleteGoal = async () => {
+        try {
+            await invoke("set_goal_removed", {
+                goalId: props.id,
+                removed: true
+            });
+            props.onGoalRemoved()
+        } catch(e) {
+            console.error("Error removing goal");
+        }
+    };
 
     return (
         <div class="bg-gaze-700/40 rounded-md border-white/10 border shadow-md text-soothe-200 flex flex-col hover:border-orange-300/50 hover:bg-calm-400/20 hover:cursor-pointer transition-colors">
@@ -28,7 +38,7 @@ function Goal(props: GoalProps) {
             <div class="flex w-full border-t-white/10 border-t">
                 <div class="p-2 text-calm-500 tracking-wider font-normal text-sm uppercase flex-1">{trackingInfo()}</div>
                 <button
-                    onClick={handleDelete}
+                    onClick={() => deleteGoal()}
                     class="border-l-white/10 border-l py-2 px-3 inline-flex hover:bg-orange-300/20 transition-colors">
                     <TrashIcon class="w-5 fill-red-400/50" />
                 </button>

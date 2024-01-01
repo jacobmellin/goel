@@ -59,6 +59,7 @@ export default function AddGoalModal(props: AddGoalModalProps) {
             props.onGoalAdded();
             props.onModalHide();
         } catch(e) {
+            console.error(e);
             props.onGoalAddError(e);
         }
     };

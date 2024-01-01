@@ -4,9 +4,14 @@
 mod db;
 
 #[tauri::command]
-fn get_goals() -> String {
-    let goals = db::get_goals();
-    serde_json::to_string(&goals).unwrap()
+fn get_goals() -> Result<String, String> {
+    let goals = db::get_goals()?;
+    let json = serde_json::to_string(&goals);
+
+    match json {
+        Ok(data) => Ok(data),
+        Err(error) => Err(error.to_string())
+    }
 }
 
 #[tauri::command]
@@ -29,8 +34,9 @@ fn new_goal(goal_json: &str) -> Result<String, String> {
 }
 
 #[tauri::command]
-fn get_goal(id: &str) -> &str {
-    "goal"
+fn get_goal(goal_id: &str) -> String {
+    let goal = db::get_goal(goal_id);
+    serde_json::to_string(&goal).unwrap()
 }
 
 #[tauri::command]
@@ -39,8 +45,8 @@ fn update_goal(id: &str, goal_raw: &str) {
 }
 
 #[tauri::command]
-fn remove_goal(id: &str) {
-
+fn set_goal_removed(goal_id: &str, removed: bool) -> Result<usize, String> {
+    db::set_goal_removed(goal_id, removed)
 }
 
 fn main() {
@@ -50,7 +56,7 @@ fn main() {
             new_goal,
             get_goal,
             update_goal,
-            remove_goal
+            set_goal_removed
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -73,6 +73,9 @@ fn main() {
                 println!("left click!");
                 todo!("implement left click show action");
             },
+            SystemTrayEvent::DoubleClick { .. } => {
+                println!("double click");
+            },
             SystemTrayEvent::MenuItemClick { id, .. } => {
                 let item_handle = app.tray_handle().get_item(&id);
                 match id.as_str() {

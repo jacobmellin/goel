@@ -8,7 +8,8 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "gen-icons": "convert -density 3072 -background none src-tauri/icons/icon.svg src-tauri/icons/icon.png && tauri icon src-tauri/icons/icon.png"
   },
   "license": "MIT",
   "dependencies": {

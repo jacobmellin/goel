@@ -38,6 +38,10 @@
     "security": {
       "csp": null
     },
+    "systemTray" : {
+        "iconPath": "icons/icon.png",
+        "menuOnLeftClick": false
+    },
     "windows": [
       {
         "fullscreen": false,

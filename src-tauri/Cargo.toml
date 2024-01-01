@@ -21,6 +21,9 @@ dotenv = "0.15.0"
 diesel = { version = "2.1.0", features = ["sqlite", "chrono"] }
 uuid = "1.6.1"
 chrono = { version = "0.4.31", features = ["serde"] }
+confy = "0.5.1"
+platform-dirs = "0.3.0"
+diesel_migrations = "2.1.0"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem

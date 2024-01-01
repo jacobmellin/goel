@@ -21,11 +21,11 @@ fn if_err_to_string<T,U>(result: Result<T,U>) -> Result<T, String>
 }
 
 pub fn establish_connection() -> Result<SqliteConnection, String> {
-    dotenv().ok();
-    let database_url = env::var("DATABASE_URL")
-        .expect("Database URL not set!");
+    let cfg: crate::config::GoelConfig = confy::load("goel", None).unwrap();
 
-    if_err_to_string(SqliteConnection::establish(&database_url))
+    let db_path = cfg.db_dir.join("goel.sqlite");
+
+    if_err_to_string(SqliteConnection::establish(&db_path.display().to_string()))
 }
 
 pub fn get_goals() -> Result<Vec<Goal>, String> {

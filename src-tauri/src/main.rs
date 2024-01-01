@@ -2,6 +2,12 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod db;
+mod config;
+
+use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
+
+pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!("migrations");
+
 
 #[tauri::command]
 fn get_goals() -> Result<String, String> {
@@ -50,6 +56,9 @@ fn set_goal_removed(goal_id: &str, removed: bool) -> Result<usize, String> {
 }
 
 fn main() {
+    let db_connection = &mut db::establish_connection().unwrap();
+    db_connection.run_pending_migrations(MIGRATIONS).unwrap();
+
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
             get_goals, 

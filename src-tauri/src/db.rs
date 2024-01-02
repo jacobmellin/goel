@@ -32,6 +32,7 @@ pub fn get_goals() -> Result<Vec<Goal>, String> {
     let connection = &mut establish_connection()?;
 
     let result = goals.limit(50)
+        .filter(is_removed.eq(false))
         .load::<Goal>(connection);
 
     if_err_to_string(result)

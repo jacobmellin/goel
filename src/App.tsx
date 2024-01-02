@@ -18,6 +18,7 @@ function App() {
 
     const [goals, { refetch }] = createResource<GoalRecord[]>(async () => {
         const goals: string = await invoke("get_goals");
+        console.log(goals);
         return JSON.parse(goals);
     });
 

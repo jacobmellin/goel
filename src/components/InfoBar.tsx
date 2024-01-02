@@ -57,7 +57,10 @@ export const InfoBar = () => {
         }}
         onMouseOut={() => {
             clearTimeout(infoBarTimeout);
-            infoBarTimeout = setTimeout(() => setState({ visible: false }), displayDuration)
+            infoBarTimeout = setTimeout(() => 
+                setState({
+                    visible: false
+            }), displayDuration)
         }}
         classList={{ hidden: !state.visible }}
         class="fixed z-10 left-0 bottom-8 w-full flex items-center justify-items-center">

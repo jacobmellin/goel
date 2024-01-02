@@ -1,12 +1,23 @@
 import Logo from "../assets/logo.svg";
 import { appWindow } from '@tauri-apps/api/window';
 import { A } from '@solidjs/router';
+import { useGoals } from "../store/goals";
+import { Show } from "solid-js";
 
 function NavItem(props: any) {
-    return <li><A href={props.href} class="uppercase tracking-wider text-calm-500 hover:text-calm-200 transition-colors" activeClass="text-calm-200">{props.children}</A></li>;
+    return <li class="uppercase tracking-wider">
+        <Show when={!props.disabled} fallback={<span class="text-calm-500/50">{props.children}</span>}>
+            <A href={props.href}
+                class=" text-calm-500 hover:text-calm-200 transition-colors"
+                activeClass="text-calm-200">{props.children}
+            </A>
+        </Show>
+    </li>;
 }
 
 export default function Header() {
+    const [goals,] = useGoals();
+
     return <div data-tauri-drag-region class="px-6 pt-6 select-none cursor-default flex items-center relative z-10">
         <a href="#" onClick={async () => { await appWindow.hide(); }} class="close-btn absolute bg-red-400 right-4 top-4 rounded-full w-3 h-3 hover:bg-red-200 focus:bg-red-200 transition-colors"></a>
         <a target="_blank"
@@ -18,9 +29,9 @@ export default function Header() {
         </a>
         <ul class="inline-flex gap-4 ml-8">
             <NavItem href="/">My goals</NavItem>
-            <NavItem href="/progress">Track Progress</NavItem>
-            <NavItem href="/trash">Trash</NavItem>
-            <NavItem href="/settings">Settings</NavItem>
+            <NavItem disabled={!goals()?.length} href="/track">Track Progress</NavItem>
+            <NavItem disabled href="/trash">Trash</NavItem>
+            <NavItem disabled href="/settings">Settings</NavItem>
         </ul>
     </div>;
 }

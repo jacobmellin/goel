@@ -2,9 +2,9 @@
 
 ## Todo
 
+- [ ] Add context / undo for info bar; delete example
 - [ ] Add button to track goal
 - [ ] Add minimum window size
-- [ ] Add context / undo for info bar; delete example
 - [ ] Add router and goal tracking view
 
 ## Ideas

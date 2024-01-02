@@ -3,6 +3,7 @@ import TrashIcon from 'eva-icons/outline/svg/trash-outline.svg';
 import { TrackingInterval } from '../types/Goal';
 import { createEffect, createSignal } from 'solid-js';
 import { invoke } from '@tauri-apps/api';
+import { useInfoBar } from './InfoBar';
 
 interface GoalProps {
     text: string,
@@ -25,6 +26,13 @@ function Goal(props: GoalProps) {
             await invoke("set_goal_removed", {
                 goalId: props.id,
                 removed: true
+            });
+            useInfoBar().showInfo("Goal deleted", true, async () => {
+                await invoke("set_goal_removed", {
+                    goalId: props.id,
+                    removed: false
+                });
+                props.onGoalRemoved();
             });
             props.onGoalRemoved()
         } catch(e) {

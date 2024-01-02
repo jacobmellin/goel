@@ -1,3 +1,4 @@
+import { Show } from "solid-js";
 import Button from "./Button";
 import { createStore } from "solid-js/store";
 
@@ -63,6 +64,12 @@ export const InfoBar = () => {
         <div class="mx-8 bg-soothe-700 border-white/10 border shadow-lg w-full rounded p-1 text-soothe-400 flex">
             <div class="flex-1 px-1">{state.text}</div>
             <div class="flex gap-1">
+                <Show when={state.undoable}>
+                    <Button small onClick={() => {
+                        state.onUndoClicked!();
+                        setState({ visible: false });
+                    }}>Undo</Button>
+                </Show>
                 <Button small onClick={() => {
                     setState({ visible: false });
                 }}>Dismiss</Button>

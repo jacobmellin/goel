@@ -5,7 +5,7 @@ mod config;
 mod db;
 
 use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
-use tauri::{Manager, CustomMenuItem, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem};
+use tauri::{Manager, CustomMenuItem, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem, WindowEvent, GlobalWindowEvent};
 
 pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!("migrations");
 
@@ -96,6 +96,23 @@ fn main() {
                 }
             }
             _ => {}
+        })
+        .setup(|app| {
+            let item_handle = app.tray_handle().get_item("hide");
+            let window = app.get_window("main").unwrap();
+            
+            let window_ = window.clone();
+
+            window.on_window_event(move |event| match event {
+                WindowEvent::Focused(false) => {
+                    if !window_.is_visible().unwrap() {
+                        item_handle.set_title("Show").unwrap();
+                    }
+                },
+                _ => {}
+            });
+
+            Ok(())
         })
         .invoke_handler(tauri::generate_handler![
             get_goals,

@@ -2,10 +2,16 @@
 
 ## Todo
 
-- [ ] Add context / undo for info bar; delete example
-- [ ] Add button to track goal
 - [ ] Add minimum window size
 - [ ] Add router and goal tracking view
+- [ ] Open Window on tray icon left / double click
+- [ ] Add Settings view
+- [ ] Close add goal modal on esc
+- [ ] Add shortcuts handling
+- [ ] Add tooltips
+- [ ] Different colors for infobar on different actions
+- [ ] Focus trap for modal
+- [ ] Add form add goal validation error
 
 ## Ideas
 

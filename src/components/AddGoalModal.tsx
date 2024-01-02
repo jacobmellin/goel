@@ -10,18 +10,13 @@ import SelectInput from "./SelectInput";
 import NumberInput from "./NumberInput";
 
 import { GoalRecord, TrackingInterval } from '../types/Goal';
+import { useInfoBar } from "./InfoBar";
+import { useGoals } from "../store/goals";
 
 interface TrackProgressOption {
     name: TrackingInterval,
     label: string,
     selectedLabel?: string
-}
-
-interface AddGoalModalProps {
-    visible: boolean,
-    onModalHide: Function,
-    onGoalAdded: Function,
-    onGoalAddError: Function
 }
 
 const optionsFormat = 
@@ -34,10 +29,32 @@ const optionsFormat =
             item.label : item.selectedLabel || item.label);
     }
 
-export default function AddGoalModal(props: AddGoalModalProps) {
+interface AddGoalModalData {
+    visible: boolean,
+}
+
+const [state, setState] = createStore<AddGoalModalData>({
+    visible: false
+});
+
+export const useAddGoalModal = () => {
+    return {
+        open() {
+            setState({ visible: true });
+        },
+        close() {
+            setState({ visible: false });
+        }
+    }
+};
+
+export default function AddGoalModal() {
+    const infoBar = useInfoBar();
+    const [, refetchGoals] = useGoals();
+
     const [formRef, setFormRef] = createSignal<HTMLFormElement | undefined>(undefined);
 
-    const [trackProgressOpts, _] = createStore<Array<TrackProgressOption>>(
+    const [trackProgressOpts,] = createStore<Array<TrackProgressOption>>(
         [
             { name: "daily", label: "Daily", },
             { name: "weekly", label: "Weekly" },
@@ -56,16 +73,16 @@ export default function AddGoalModal(props: AddGoalModalProps) {
         try {
             await invoke("new_goal", { goalJson: JSON.stringify(goalRecord) });
             formRef()?.reset();
-            props.onGoalAdded();
-            props.onModalHide();
+            refetchGoals();
+            infoBar.showInfo("Goal added");
+            setState({ visible: false });
         } catch(e) {
-            console.error(e);
-            props.onGoalAddError(e);
+            infoBar.showError(`Error adding goal: ${e}`)
         }
     };
 
 
-    return <Modal visible={props.visible} title="Add a new goal">
+    return <Modal visible={state.visible} title="Add a new goal">
         <form ref={(el) => setFormRef(el)} onSubmit={(e) => {
             e.preventDefault()
             createGoal();
@@ -99,7 +116,7 @@ export default function AddGoalModal(props: AddGoalModalProps) {
             </div>
             <div class="flex mt-4 pt-2 gap-2 flex-row justify-space-between">
                 <ButtonPrimary submit>Add Goal</ButtonPrimary>
-                <Button onClick={props.onModalHide}>Cancel</Button>
+                <Button onClick={() => setState({ visible: false})}>Cancel</Button>
             </div>
         </form>
     </Modal>;

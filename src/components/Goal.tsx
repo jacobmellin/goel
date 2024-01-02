@@ -1,4 +1,5 @@
 import TrashIcon from 'eva-icons/outline/svg/trash-outline.svg';
+import TrackIcon from 'eva-icons/outline/svg/file-add-outline.svg';
 
 import { TrackingInterval } from '../types/Goal';
 import { createEffect, createSignal } from 'solid-js';
@@ -46,9 +47,14 @@ function Goal(props: GoalProps) {
             <div class="flex w-full border-t-white/10 border-t">
                 <div class="p-2 text-calm-500 tracking-wider font-normal text-sm uppercase flex-1">{trackingInfo()}</div>
                 <button
-                    onClick={() => deleteGoal()}
+                    onClick={() => console.log("goal")}
                     class="border-l-white/10 border-l py-2 px-3 inline-flex hover:bg-orange-300/20 transition-colors">
-                    <TrashIcon class="w-5 fill-red-400/50" />
+                    <TrackIcon class="h-[18px] fill-orange-300/70" />
+                </button>
+                <button
+                    onClick={() => deleteGoal()}
+                    class="border-l-white/10 border-l py-2 px-3 inline-flex hover:bg-orange-300/20 transition-colors items-center justify-content-center">
+                    <TrashIcon class="h-[18px] fill-red-400/70" />
                 </button>
             </div>
         </div>

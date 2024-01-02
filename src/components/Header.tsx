@@ -6,10 +6,11 @@ import { Show } from "solid-js";
 
 function NavItem(props: any) {
     return <li class="uppercase tracking-wider">
-        <Show when={!props.disabled} fallback={<span class="text-calm-500/50">{props.children}</span>}>
+        <Show when={!props.disabled} fallback={<span class="text-md text-calm-500/50">{props.children}</span>}>
             <A href={props.href}
-                class=" text-calm-500 hover:text-calm-200 transition-colors"
-                activeClass="text-calm-200">{props.children}
+                class="text-calm-500 hover:text-calm-300 transition-colors text-md"
+                end={true}
+                activeClass="underline-offset-4 underline text-calm-300 cursor-default">{props.children}
             </A>
         </Show>
     </li>;

@@ -36,7 +36,7 @@ export default function Header() {
             <Logo class="w-10 h-10 stroke-orange-300 mr-2" />
             <span>Goel</span>
         </a>
-        <ul class="inline-flex gap-4 ml-8">
+        <ul class="inline-flex gap-4 ml-8 relative -top-0.5">
             <NavItem href="/" iconName="star">goals</NavItem>
             <NavItem disabled={!goals()?.length} iconName="file-add" href="/track">Track</NavItem>
             <NavItem disabled href="/trash" iconName="trash">Trash</NavItem>

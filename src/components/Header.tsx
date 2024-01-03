@@ -3,14 +3,21 @@ import { appWindow } from '@tauri-apps/api/window';
 import { A } from '@solidjs/router';
 import { useGoals } from "../store/goals";
 import { Show } from "solid-js";
+import EvaIcon from "./EvaIcon";
 
 function NavItem(props: any) {
-    return <li class="uppercase tracking-wider">
-        <Show when={!props.disabled} fallback={<span class="text-md text-calm-500/50">{props.children}</span>}>
+    return <li class="uppercase tracking-wider p-2 rounded bg-gaze-700/30 min-[600px]:p-0 min-[600px]:bg-transparent">
+        <Show when={!props.disabled} fallback={
+            <span class="text-md text-gaze-500/30 flex justify-center items-middle gap-2">
+                <EvaIcon class="fill-gaze-500/30 w-[22px] min-[600px]:w-5 relative" name={props.iconName} />
+                <span class="hidden min-[600px]:block">{props.children}</span>
+            </span>}>
             <A href={props.href}
-                class="text-calm-500 hover:text-calm-300 transition-colors text-md"
+                class="text-calm-500 hover:text-calm-300 transition-colors text-md flex items-middle justify-center gap-2"
                 end={true}
-                activeClass="underline-offset-4 underline text-calm-300 cursor-default">{props.children}
+                activeClass="underline-offset-4 underline text-calm-300 cursor-default [&>svg]:fill-calm-300 ">
+                    <EvaIcon class="cursor-pointer fill-calm-500 w-[22px] min-[600px]:w-5 min-w-5 relative" name={props.iconName} />
+                    <span class="hidden min-[600px]:block">{props.children}</span>
             </A>
         </Show>
     </li>;
@@ -29,10 +36,10 @@ export default function Header() {
             <span>Goel</span>
         </a>
         <ul class="inline-flex gap-4 ml-8">
-            <NavItem href="/">My goals</NavItem>
-            <NavItem disabled={!goals()?.length} href="/track">Track Progress</NavItem>
-            <NavItem disabled href="/trash">Trash</NavItem>
-            <NavItem disabled href="/settings">Settings</NavItem>
+            <NavItem href="/" iconName="star">goals</NavItem>
+            <NavItem disabled={!goals()?.length} iconName="file-add" href="/track">Track</NavItem>
+            <NavItem disabled href="/trash" iconName="trash">Trash</NavItem>
+            <NavItem disabled href="/settings" iconName="settings-2">Settings</NavItem>
         </ul>
     </div>;
 }

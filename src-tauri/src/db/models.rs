@@ -2,7 +2,7 @@ use chrono::NaiveDateTime;
 use diesel::{Queryable, Selectable, Insertable};
 use serde::{Serialize, Deserialize};
 
-#[derive(Queryable, Serialize, Selectable)]
+#[derive(Debug, Queryable, Serialize, Selectable)]
 #[diesel(table_name = super::schema::goals)]
 #[diesel(check_for_backend(diesel::sqlite::Sqlite))]
 pub struct Goal {
@@ -18,6 +18,7 @@ pub struct Goal {
 
 #[derive(Debug, Insertable, Deserialize)]
 #[diesel(table_name = super::schema::goals)]
+#[diesel(check_for_backend(diesel::sqlite::Sqlite))]
 pub struct GoalNew<'a> {
     #[serde(default)]
     pub id: String,
@@ -26,4 +27,32 @@ pub struct GoalNew<'a> {
     pub tracking_days_interval: Option<i32>,
     #[serde(default)]
     pub date_created: NaiveDateTime,
+}
+
+#[derive(Debug, Queryable, Serialize, Selectable)]
+#[diesel(table_name = super::schema::goal_ratings)]
+#[diesel(check_for_backend(diesel::sqlite::Sqlite))]
+pub struct GoalRating {
+    pub id: String,
+    pub rating: Option<i32>,
+    pub barriers_reflection: Option<String>,
+    pub success_reflection: Option<String>,
+    pub overcome_reflection: Option<String>,
+    pub date_created: NaiveDateTime,
+    pub date_modified: Option<NaiveDateTime>,
+    pub goal_id: String,
+}
+
+#[derive(Debug, Insertable, Deserialize)]
+#[diesel(table_name = super::schema::goal_ratings)]
+#[diesel(check_for_backend(diesel::sqlite::Sqlite))]
+pub struct GoalRatingNew<'a> {
+    pub id: &'a str,
+    pub rating: Option<i32>,
+    pub barriers_reflection: Option<&'a str>,
+    pub success_reflection: Option<&'a str>,
+    pub overcome_reflection: Option<&'a str>,
+    pub date_created: NaiveDateTime,
+    pub date_modified: Option<NaiveDateTime>,
+    pub goal_id: &'a str,
 }

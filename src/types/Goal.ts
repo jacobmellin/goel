@@ -7,8 +7,10 @@ interface GoalRecord {
     tracking_days_interval: number,
     is_active: boolean,
     is_removed: boolean,
-    date_created: string,
-    date_modified: string
+    pending_reflection?: boolean,
+    next_reflection_date: Date
+    date_created: Date,
+    date_modified: Date
 }
 
 export type {

@@ -2,10 +2,9 @@
 
 ## Todo
 
-- [ ] Add minimum window size
-- [ ] Add router and goal tracking view
+- [ ] Goal tracking view
+- [ ] Settings view
 - [ ] Open Window on tray icon left / double click
-- [ ] Add Settings view
 - [ ] Close add goal modal on esc
 - [ ] Add shortcuts handling
 - [ ] Add tooltips

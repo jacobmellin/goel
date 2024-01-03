@@ -13,8 +13,9 @@ function NavItem(props: any) {
                 <span class="hidden min-[600px]:block">{props.children}</span>
             </span>}>
             <A href={props.href}
-                class="text-calm-500 hover:text-calm-300 transition-colors text-md flex items-middle justify-center gap-2"
+                class="hover:text-calm-300 transition-colors text-md flex items-middle justify-center gap-2"
                 end={true}
+                inactiveClass="text-calm-500"
                 activeClass="underline-offset-4 underline text-calm-300 cursor-default [&>svg]:fill-calm-300 ">
                     <EvaIcon class="cursor-pointer fill-calm-500 w-[22px] min-[600px]:w-5 min-w-5 relative" name={props.iconName} />
                     <span class="hidden min-[600px]:block">{props.children}</span>

@@ -47,12 +47,15 @@ pub struct GoalRating {
 #[diesel(table_name = super::schema::goal_ratings)]
 #[diesel(check_for_backend(diesel::sqlite::Sqlite))]
 pub struct GoalRatingNew<'a> {
+    #[serde(default)]
     pub id: &'a str,
     pub rating: Option<i32>,
     pub barriers_reflection: Option<&'a str>,
     pub success_reflection: Option<&'a str>,
     pub overcome_reflection: Option<&'a str>,
+    #[serde(default)]
     pub date_created: NaiveDateTime,
     pub date_modified: Option<NaiveDateTime>,
+    #[serde(default)]
     pub goal_id: &'a str,
 }

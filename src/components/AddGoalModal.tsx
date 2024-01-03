@@ -100,20 +100,25 @@ export default function AddGoalModal() {
                     <SelectInput
                         initialValue={trackProgressOpts[0]}
                         label="Remind / Track Progress"
-                        format={optionsFormat} options={trackProgressOpts}      onChange={(v: TrackProgressOption) => {
+                        format={optionsFormat} options={trackProgressOpts} 
+                        onChange={(v: TrackProgressOption) => {
                             setGoalRecord({ tracking_freq: v.name });
                         }}
                     />
                 </div>
                 <Show when={goalRecord.tracking_freq === 'every'}>
                     <div class="grow max-w-32">
-                        <NumberInput default={2} min={2} max={365} label="Number of Days" onChange={(n) => setGoalRecord({ tracking_days_interval: n })} />
+                        <NumberInput default={2} min={2} 
+                                     max={365} label="Number of Days"
+                                     onChange={
+                                        (n) => setGoalRecord({ tracking_days_interval: n })} />
                     </div>
                     <div class="px-2 py-2 self-end text-gaze-300">
                         days
                     </div>
                 </Show>
             </div>
+            <div class="text-sm text-soothe-400">Goel will remind you ..daily.. of this goal, starting at Wednesday, January 3rd.</div>
             <div class="flex mt-4 pt-2 gap-2 flex-row justify-space-between">
                 <ButtonPrimary submit>Add Goal</ButtonPrimary>
                 <Button onClick={() => setState({ visible: false})}>Cancel</Button>

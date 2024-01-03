@@ -13,6 +13,7 @@
 - [ ] Add form add goal validation error
 - [ ] Goal date preview function implementation
 - [ ] Implement trash with restore and permanent delete
+- [ ] Show some info regarding goal progress when finishing tracking a goal
 
 ## Ideas
 

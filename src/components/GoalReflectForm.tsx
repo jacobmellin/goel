@@ -5,6 +5,7 @@ import ButtonPrimary from "./ButtonPrimary"
 import EvaIcon from "./EvaIcon"
 import { Show, createSignal } from "solid-js"
 import { createStore } from "solid-js/store";
+import { GoalRecord } from "../types/Goal"
 
 interface ReflectData {
     happiness?: number,
@@ -16,6 +17,7 @@ interface GoalReflectFormProps {
     onExpandChanged?: (isExpanded: boolean) => void,
     onSubmit: (reflectData: ReflectData) => void,
     onSkip: () => void,
+    goal: GoalRecord
     finished: boolean
 }
 
@@ -44,7 +46,7 @@ export default function GoalReflectForm(props: GoalReflectFormProps) {
                     <EvaIcon class="fill-calm-300 w-5" name="arrow-circle-right-outline" />
                 </div>
             </Show>
-            Build a complete application with Svelte for learning.
+            { props.goal.description }
         </button>
         <Show when={expanded()}>
             <form onSubmit={

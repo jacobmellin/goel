@@ -5,10 +5,9 @@
 - [ ] Goal tracking view
 - [ ] Settings view with nagging time
 - [ ] Open Window on tray icon left / double click
-- [ ] Close add goal modal on esc
 - [ ] Add shortcuts handling
+- [ ] Close add goal modal on esc
 - [ ] Add tooltips
-- [ ] Different colors for infobar on different actions
 - [ ] Focus trap for modal
 - [ ] Add form add goal validation error
 - [ ] Goal date preview function implementation

@@ -1,4 +1,4 @@
-import { Show } from "solid-js";
+import { Show, createSignal } from "solid-js";
 import Button from "./Button";
 import { createStore } from "solid-js/store";
 
@@ -18,8 +18,11 @@ const [state, setState] = createStore<InfoBarData>({
 });
 
 let infoBarTimeout: ReturnType<typeof setTimeout>;
+const [infoBarColor, setInfoBarColor] = createSignal("bg-soothe-700");
+const [textColor, setTextColor] = createSignal("text-soothe-400");
 
 export const useInfoBar = () => {
+
     return {
         showInfo(
             text: string,
@@ -32,6 +35,9 @@ export const useInfoBar = () => {
                 onUndoClicked
             });
 
+            setInfoBarColor("bg-teal-800/90");
+            setTextColor("text-teal-400");
+
             clearTimeout(infoBarTimeout);
             infoBarTimeout = setTimeout(() =>
                 setState({ visible: false }), displayDuration);
@@ -41,6 +47,9 @@ export const useInfoBar = () => {
                 text,
                 visible: true,
             });
+
+            setInfoBarColor("bg-soothe-700/90");
+            setTextColor("text-soothe-400");
 
             clearTimeout(infoBarTimeout);
             infoBarTimeout = setTimeout(() =>
@@ -64,7 +73,7 @@ export const InfoBar = () => {
         }}
         classList={{ hidden: !state.visible }}
         class="fixed z-10 left-0 bottom-8 w-full flex items-center justify-items-center">
-        <div class="mx-8 bg-soothe-700 border-white/10 border shadow-lg w-full rounded p-1 text-soothe-400 flex">
+        <div class={`mx-8 ${infoBarColor()} ${textColor()} border-white/10 border shadow-lg w-full rounded p-1 flex`}>
             <div class="flex-1 px-1">{state.text}</div>
             <div class="flex gap-1">
                 <Show when={state.undoable}>
@@ -73,7 +82,7 @@ export const InfoBar = () => {
                         setState({ visible: false });
                     }}>Undo</Button>
                 </Show>
-                <Button small onClick={() => {
+                <Button small={true} textColor={textColor()} onClick={() => {
                     setState({ visible: false });
                 }}>Dismiss</Button>
             </div>

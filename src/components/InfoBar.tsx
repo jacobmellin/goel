@@ -77,7 +77,7 @@ export const InfoBar = () => {
             <div class="flex-1 px-1">{state.text}</div>
             <div class="flex gap-1">
                 <Show when={state.undoable}>
-                    <Button small onClick={() => {
+                    <Button small textColor={textColor()} onClick={() => {
                         state.onUndoClicked!();
                         setState({ visible: false });
                     }}>Undo</Button>

@@ -14,6 +14,7 @@
 - [ ] Implement trash with restore and permanent delete
 - [ ] Show some info regarding goal progress when finishing tracking a goal
 - [ ] Ensure appdata directory is created
+- [ ] Ensure data is not deleted on close in goal tracking view
 
 ## Ideas
 

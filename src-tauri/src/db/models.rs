@@ -30,29 +30,27 @@ pub struct GoalNew<'a> {
 }
 
 #[derive(Debug, Queryable, Serialize, Selectable)]
-#[diesel(table_name = super::schema::goal_ratings)]
+#[diesel(table_name = super::schema::goal_reflections)]
 #[diesel(check_for_backend(diesel::sqlite::Sqlite))]
-pub struct GoalRating {
+pub struct GoalReflection {
     pub id: String,
     pub rating: Option<i32>,
     pub barriers_reflection: Option<String>,
     pub success_reflection: Option<String>,
-    pub overcome_reflection: Option<String>,
     pub date_created: NaiveDateTime,
     pub date_modified: Option<NaiveDateTime>,
     pub goal_id: String,
 }
 
 #[derive(Debug, Insertable, Deserialize)]
-#[diesel(table_name = super::schema::goal_ratings)]
+#[diesel(table_name = super::schema::goal_reflections)]
 #[diesel(check_for_backend(diesel::sqlite::Sqlite))]
-pub struct GoalRatingNew<'a> {
+pub struct GoalReflectionNew<'a> {
     #[serde(default)]
     pub id: &'a str,
     pub rating: Option<i32>,
     pub barriers_reflection: Option<&'a str>,
     pub success_reflection: Option<&'a str>,
-    pub overcome_reflection: Option<&'a str>,
     #[serde(default)]
     pub date_created: NaiveDateTime,
     pub date_modified: Option<NaiveDateTime>,

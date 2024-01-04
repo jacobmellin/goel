@@ -44,6 +44,7 @@ pub fn get_goals_pending_reflection() -> Result<Vec<Goal>, String> {
     // 3. For each goal, compare next remind date with reflection dates.
     // If no reflection exists that is newer than the reflection day,
     // the goal is pending reflection
+    todo!();
 }
 
 pub fn get_goal(goal_id: &str) -> Result<Vec<Goal>, String> {
@@ -75,21 +76,21 @@ pub fn set_goal_removed(goal_id: &str, removed: bool) -> Result<usize, String> {
     if_err_to_string(result)
 }
 
-pub fn get_ratings_for_goal(goal_id: &str) -> Result<Vec<GoalRating>, String> {
+pub fn get_reflections(goal_id: &str) -> Result<Vec<GoalReflection>, String> {
     let connection = &mut establish_connection()?;
-    let result = schema::goal_ratings::dsl::goal_ratings
-        .filter(schema::goal_ratings::dsl::goal_id.eq(goal_id))
+    let result = schema::goal_reflections::dsl::goal_reflections
+        .filter(schema::goal_reflections::dsl::goal_id.eq(goal_id))
         .limit(50)
-        .load::<GoalRating>(connection);
+        .load::<GoalReflection>(connection);
 
     if_err_to_string(result)
 }
 
-pub fn insert_goal_rating(new_goal_rating: GoalRatingNew) -> Result<usize, String> {
+pub fn insert_goal_rating(new_goal_reflection: GoalReflectionNew) -> Result<usize, String> {
     let connection = &mut establish_connection()?;
 
-    let result = insert_into(schema::goal_ratings::dsl::goal_ratings)
-        .values(&new_goal_rating)
+    let result = insert_into(schema::goal_reflections::dsl::goal_reflections)
+        .values(&new_goal_reflection)
         .execute(connection);
 
     if_err_to_string(result)

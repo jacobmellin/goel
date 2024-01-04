@@ -19,9 +19,9 @@ export default function TrackProgressView() {
                     onSkip={() => {}}
                     onSubmit={async (reflectData) => {
                         try {
-                            await invoke("create_goal_rating", { 
+                            await invoke("create_goal_reflection", { 
                                 goalId: goal.id,
-                                ratingData: JSON.stringify(reflectData)
+                                reflectionData: JSON.stringify(reflectData)
                             }); 
                             infoBar.showInfo("Saved reflection for goal!");
                         } catch(e: any) {

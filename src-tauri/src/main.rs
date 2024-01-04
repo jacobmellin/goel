@@ -5,7 +5,7 @@ mod config;
 mod db;
 
 use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
-use tauri::{Manager, CustomMenuItem, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem, WindowEvent, GlobalWindowEvent};
+use tauri::{Manager, CustomMenuItem, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem, WindowEvent};
 
 pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!("migrations");
 
@@ -67,8 +67,8 @@ fn set_goal_removed(goal_id: &str, removed: bool) -> Result<usize, String> {
 }
 
 #[tauri::command]
-fn create_goal_rating(goal_id: &str, rating_data: &str) -> Result<String, String> {
-    let mut new_rating: db::models::GoalRatingNew = match serde_json::from_str(rating_data){
+fn create_goal_reflection(goal_id: &str, reflection_data: &str) -> Result<String, String> {
+    let mut new_rating: db::models::GoalReflectionNew = match serde_json::from_str(reflection_data){
         Ok(data) => data,
         Err(err) => return Err(err.to_string())
     };
@@ -160,7 +160,7 @@ fn main() {
             get_goal,
             update_goal,
             set_goal_removed,
-            create_goal_rating
+            create_goal_reflection
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

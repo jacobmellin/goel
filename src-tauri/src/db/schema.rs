@@ -1,12 +1,11 @@
 // @generated automatically by Diesel CLI.
 
 diesel::table! {
-    goal_ratings (id) {
+    goal_reflections (id) {
         id -> Text,
         rating -> Nullable<Integer>,
         barriers_reflection -> Nullable<Text>,
         success_reflection -> Nullable<Text>,
-        overcome_reflection -> Nullable<Text>,
         date_created -> Timestamp,
         date_modified -> Nullable<Timestamp>,
         goal_id -> Text,
@@ -26,9 +25,9 @@ diesel::table! {
     }
 }
 
-diesel::joinable!(goal_ratings -> goals (goal_id));
+diesel::joinable!(goal_reflections -> goals (goal_id));
 
 diesel::allow_tables_to_appear_in_same_query!(
-    goal_ratings,
+    goal_reflections,
     goals,
 );

@@ -36,6 +36,16 @@ pub fn get_goals() -> Result<Vec<Goal>, String> {
     if_err_to_string(result)
 }
 
+pub fn get_goals_pending_reflection() -> Result<Vec<Goal>, String> {
+    // 1. Determine next remind date for goals
+    // 2. Find newest goal rating for each goal
+    // (Join goals with goal_reflections, sort by date descending, limit
+    // to 1 goal reflection)
+    // 3. For each goal, compare next remind date with reflection dates.
+    // If no reflection exists that is newer than the reflection day,
+    // the goal is pending reflection
+}
+
 pub fn get_goal(goal_id: &str) -> Result<Vec<Goal>, String> {
     let connection = &mut establish_connection()?;
     let result = schema::goals::dsl::goals

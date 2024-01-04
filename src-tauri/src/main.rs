@@ -21,6 +21,17 @@ fn get_goals() -> Result<String, String> {
 }
 
 #[tauri::command]
+fn get_goals_pending_reflection() -> Result<String, String> {
+    let goals = db::get_goals()?;
+    let json = serde_json::to_string(&goals);
+
+    match json {
+        Ok(data) => Ok(data),
+        Err(error) => Err(error.to_string()),
+    }
+}
+
+#[tauri::command]
 fn new_goal(goal_json: &str) -> Result<String, String> {
     let mut new_goal: db::models::GoalNew = match serde_json::from_str(goal_json) {
         Ok(goal) => goal,
@@ -144,6 +155,7 @@ fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             get_goals,
+            get_goals_pending_reflection,
             new_goal,
             get_goal,
             update_goal,

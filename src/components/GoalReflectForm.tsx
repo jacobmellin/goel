@@ -3,7 +3,7 @@ import RatingSlider from "./RatingSlider"
 import Button from "./Button"
 import ButtonPrimary from "./ButtonPrimary"
 import EvaIcon from "./EvaIcon"
-import { Show, createSignal } from "solid-js"
+import { Show, createEffect, createSignal } from "solid-js"
 import { createStore } from "solid-js/store";
 import { GoalRecord } from "../types/Goal"
 
@@ -28,12 +28,17 @@ export default function GoalReflectForm(props: GoalReflectFormProps) {
         goalId: props.goal.id
     });
 
+    createEffect(() => {
+        if(props.finished) {
+            setExpanded(false);
+        }  
+    });
+
     return <div class="bg-gaze-700/50 my-4 rounded-md px-4 py-4">
         <button type="button" class="rounded border border-white/10 px-3 py-2 text-calm-200 shadow-md bg-gaze-700 hover:bg-gaze-600 transition-colors font-bold flex gap-2 text-left items-center w-full" 
         classList={{ "text-calm-400/50": props.finished }}
         onClick={() => {
             if(props.finished) {
-                setExpanded(false);
                 return;
             }
             setExpanded(!expanded())

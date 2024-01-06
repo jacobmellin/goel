@@ -22,7 +22,7 @@ fn get_goals() -> Result<String, String> {
 
 #[tauri::command]
 fn get_goals_pending_reflection() -> Result<String, String> {
-    let goals = db::get_goals()?;
+    let goals = db::get_goals_pending_reflection()?;
     let json = serde_json::to_string(&goals);
 
     match json {

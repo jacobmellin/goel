@@ -1,13 +1,17 @@
-import { For } from "solid-js";
+import { For, createResource } from "solid-js";
 import GoalReflectForm from "../components/GoalReflectForm";
-import { useGoals } from "../store/goals";
 import { invoke } from "@tauri-apps/api";
 import { useInfoBar } from "../components/InfoBar";
+import { GoalRecord } from "../types/Goal";
 
 export default function TrackProgressView() {
-    {/* TODO: Get only goals pending tracking */}
-    const [goals,] = useGoals();
     const infoBar = useInfoBar();
+
+    const [goals,] = createResource<GoalRecord[]>(async () => {
+        const res = await invoke("get_goals_pending_reflection");
+        console.log(res);
+        return JSON.parse(res);
+    })
 
     return <div class="mt-4">
         <h1 class="font-bold text-lg text-soothe-400">Track Goal Progress (0/{goals()?.length})</h1>

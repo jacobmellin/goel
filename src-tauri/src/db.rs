@@ -37,14 +37,22 @@ pub fn get_goals() -> Result<Vec<Goal>, String> {
 }
 
 pub fn get_goals_pending_reflection() -> Result<Vec<Goal>, String> {
-    // 1. Determine next remind date for goals
-    // 2. Find newest goal rating for each goal
-    // (Join goals with goal_reflections, sort by date descending, limit
-    // to 1 goal reflection)
-    // 3. For each goal, compare next remind date with reflection dates.
-    // If no reflection exists that is newer than the reflection day,
-    // the goal is pending reflection
-    todo!();
+    let connection = &mut establish_connection()?;
+    let goals = get_goals()?;
+
+    let pending_goals = goals.into_iter().filter(|goal| {
+        let newest_goal_reflection = GoalReflection::belonging_to(&goal)
+            .order_by(schema::goal_reflections::dsl::date_created.desc())
+            .first::<GoalReflection>(connection);
+
+        if let Ok(newest_goal_reflection) = newest_goal_reflection {
+            goal.is_pending_reflection(Some(newest_goal_reflection.date_created))
+        } else {
+            goal.is_pending_reflection(None)
+        }
+    }).collect();
+
+    Ok(pending_goals)
 }
 
 pub fn get_goal(goal_id: &str) -> Result<Vec<Goal>, String> {

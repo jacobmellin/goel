@@ -25,6 +25,7 @@
 
   @apply bg-gradient-to-b from-blue-900/30 to-purple-800/20;
   @apply h-full;
+  @apply rounded-xl;
 }
 
 :root.special-decoration {
@@ -34,7 +35,6 @@
     left:5px;
     right:5px;
     bottom:5px;
-    @apply rounded-2xl;
     box-shadow: 0 2px 7px rgba(0,0,0,0.5);
 }
 

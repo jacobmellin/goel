@@ -67,8 +67,8 @@ fn set_goal_removed(goal_id: &str, removed: bool) -> Result<usize, String> {
 }
 
 #[tauri::command]
-fn create_goal_reflection(goal_id: &str, reflection_data: &str) -> Result<String, String> {
-    let mut new_rating: db::models::GoalReflectionNew = match serde_json::from_str(reflection_data){
+fn create_goal_reflection(reflect_data: &str) -> Result<String, String> {
+    let mut new_rating: db::models::GoalReflectionNew = match serde_json::from_str(reflect_data){
         Ok(data) => data,
         Err(err) => return Err(err.to_string())
     };
@@ -77,9 +77,6 @@ fn create_goal_reflection(goal_id: &str, reflection_data: &str) -> Result<String
 
     let id: &str = &uuid::Uuid::new_v4().to_string();
     new_rating.id = id;
-    
-    // TODO: Check if goal actually exists
-    new_rating.goal_id = goal_id;
 
     let result = db::insert_goal_rating(new_rating);
 

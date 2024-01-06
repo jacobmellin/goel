@@ -23,10 +23,12 @@ export default function TrackProgressView() {
                     onSkip={() => {}}
                     onSubmit={async (reflectData) => {
                         try {
-                            await invoke("create_goal_reflection", { 
-                                goalId: goal.id,
-                                reflectionData: JSON.stringify(reflectData)
-                            }); 
+                            await invoke("create_goal_reflection", { reflectData: JSON.stringify({
+                                rating: reflectData.rating,
+                                barriers_reflection: reflectData.barriersReflection,
+                                success_reflection: reflectData.successReflection,
+                                goal_id: reflectData.goalId
+                            }) }); 
                             infoBar.showInfo("Saved reflection for goal!");
                         } catch(e: any) {
                             infoBar.showError(e.toString());
@@ -36,3 +38,4 @@ export default function TrackProgressView() {
         </For>
     </div>;
 }
+

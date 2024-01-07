@@ -4,7 +4,6 @@
 
 ### Priority: High
 
-- [ ] Validation of goal tracking
 - [ ] Automatic reminder when it's time to track goals (nagging)
 - [ ] Add form add goal validation error
 - [ ] Settings view with nagging time
@@ -16,6 +15,8 @@
 
 ### Priority: Low
 
+- [ ] Internationalization
+- [ ] Font scale setting
 - [ ] Open Window on tray icon left / double click
 - [ ] Animations for everything
 - [ ] Add shortcuts handling

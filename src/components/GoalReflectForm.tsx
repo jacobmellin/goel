@@ -65,9 +65,9 @@ export default function GoalReflectForm(props: GoalReflectFormProps) {
             }>
                 <h2 class="font-bold mt-4 text-sm text-gaze-400 relative left-0.5">How happy are you with your progress on this goal?</h2>
                 <div class="mb-4"><RatingSlider initialValue={reflectData.rating} onValueChange={(v) => setReflectData({rating: Math.round(v)})} /></div>
-                <TextareaInput onChange={(v) => setReflectData({ barriersReflection: v})} label="What prevented you from working towards this goal? What do you want to focus on?" >{reflectData.barriersReflection}</TextareaInput>
+                <TextareaInput required onChange={(v) => setReflectData({ barriersReflection: v})} label="What prevented you from working towards this goal? What do you want to focus on?" >{reflectData.barriersReflection}</TextareaInput>
                 <h2 class="font-bold mt-4 text-sm text-calm-400"></h2>
-                <TextareaInput onChange={(v) => setReflectData({ successReflection: v})} label="What went well? What helped you pursue this goal?">{reflectData.successReflection}</TextareaInput>
+                <TextareaInput required onChange={(v) => setReflectData({ successReflection: v})} label="What went well? What helped you pursue this goal?">{reflectData.successReflection}</TextareaInput>
                 <div class="flex gap-2">
                     <div class="mb-1 mt-4"><ButtonPrimary submit>Save and Continue</ButtonPrimary></div>
                     <div class="mb-1 mt-4"><Button onClick={props.onSkip}>Don't track this time</Button></div>

@@ -16,17 +16,21 @@ DATABASE_URL=./development.sqlite
 
 #### Priority: High
 
-- [ ] Automatic reminder when it's time to track goals (nagging)
 - [ ] Settings view with nagging time
+- [ ] Automatic reminder when it's time to track goals (nagging)
 
 #### Priority: Medium
 
 - [ ] Goal date preview function implementation
-- [ ] Conceptiualize and implement goal reflection view
+- [ ] Conceptualize and implement goal reflection view
 - [ ] Ensure appdata directory is created on first launch
+- [ ] Fix my footer
 
 #### Priority: Low
 
+- [ ] Display special screen after finishing tracking all pending goals
+- [ ] Make skip goal undoable
+- [ ] Move happiness bar on drag
 - [ ] Advanced form validation
 - [ ] Internationalization
 - [ ] Font scale setting

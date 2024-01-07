@@ -40,7 +40,7 @@ export default function Header() {
             <NavItem href="/" iconName="star">goals</NavItem>
             <NavItem disabled={!goals()?.length} iconName="file-add" href="/track">Track</NavItem>
             <NavItem disabled href="/trash" iconName="trash">Trash</NavItem>
-            <NavItem disabled href="/settings" iconName="settings-2">Settings</NavItem>
+            <NavItem href="/settings" iconName="settings-2">Settings</NavItem>
         </ul>
     </div>;
 }

@@ -4,7 +4,6 @@
 
 ### Priority: High
 
-- [ ] Implement skip function for goal tracking
 - [ ] Validation of goal tracking
 - [ ] Automatic reminder when it's time to track goals (nagging)
 - [ ] Add form add goal validation error

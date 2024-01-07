@@ -66,6 +66,7 @@ pub struct GoalReflection {
     pub rating: Option<i32>,
     pub barriers_reflection: Option<String>,
     pub success_reflection: Option<String>,
+    pub skipped: Option<bool>,
     pub date_created: NaiveDateTime,
     pub date_modified: Option<NaiveDateTime>,
     pub goal_id: String,
@@ -80,6 +81,7 @@ pub struct GoalReflectionNew<'a> {
     pub rating: Option<i32>,
     pub barriers_reflection: Option<&'a str>,
     pub success_reflection: Option<&'a str>,
+    pub skipped: Option<bool>,
     #[serde(default)]
     pub date_created: NaiveDateTime,
     pub date_modified: Option<NaiveDateTime>,

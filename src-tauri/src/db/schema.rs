@@ -6,6 +6,7 @@ diesel::table! {
         rating -> Nullable<Integer>,
         barriers_reflection -> Nullable<Text>,
         success_reflection -> Nullable<Text>,
+        skipped -> Nullable<Bool>,
         date_created -> Timestamp,
         date_modified -> Nullable<Timestamp>,
         goal_id -> Text,

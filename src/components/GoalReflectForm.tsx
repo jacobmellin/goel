@@ -70,7 +70,7 @@ export default function GoalReflectForm(props: GoalReflectFormProps) {
                 <TextareaInput onChange={(v) => setReflectData({ successReflection: v})} label="What went well? What helped you pursue this goal?">{reflectData.successReflection}</TextareaInput>
                 <div class="flex gap-2">
                     <div class="mb-1 mt-4"><ButtonPrimary submit>Save and Continue</ButtonPrimary></div>
-                    <div class="mb-1 mt-4"><Button onClick={props.onSkip}>Skip</Button></div>
+                    <div class="mb-1 mt-4"><Button onClick={props.onSkip}>Don't track this time</Button></div>
                 </div>
             </form>
         </Show>

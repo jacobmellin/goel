@@ -20,7 +20,19 @@ export default function TrackProgressView() {
                 const [finished, setFinished] = createSignal(false);
                 return <GoalReflectForm
                     finished={finished()}
-                    onSkip={() => {}}
+                    onSkip={async () => {
+                        try {
+                            await invoke("create_goal_reflection", { 
+                                reflectData: JSON.stringify({
+                                skipped: true,
+                                goal_id: goal.id
+                            }) }); 
+                            setFinished(true);
+                        }
+                        catch(e: any) {
+                            infoBar.showError(e.toString());
+                        }
+                    }}
                     onSubmit={async (reflectData) => {
                         try {
                             await invoke("create_goal_reflection", { reflectData: JSON.stringify({

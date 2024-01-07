@@ -1,5 +1,7 @@
 use diesel::dsl::insert_into;
 use diesel::prelude::*;
+use dotenv::dotenv;
+use std::env;
 
 pub mod models;
 pub mod schema;
@@ -18,11 +20,19 @@ where
 }
 
 pub fn establish_connection() -> Result<SqliteConnection, String> {
-    let cfg: crate::config::GoelConfig = confy::load("goel", None).unwrap();
+    dotenv().ok();
 
-    let db_path = cfg.db_dir.join("goel.sqlite");
+    let db_url_env = env::var("DATABASE_URL");
 
-    if_err_to_string(SqliteConnection::establish(&db_path.display().to_string()))
+    let db_url: String = match db_url_env {
+        Ok(env_url) => env_url,
+        Err(_) => {
+            let cfg: crate::config::GoelConfig = confy::load("goel", None).unwrap();
+            cfg.db_dir.join("goel.sqlite").display().to_string()
+        }
+    };
+
+    if_err_to_string(SqliteConnection::establish(db_url.as_str()))
 }
 
 pub fn get_goals() -> Result<Vec<Goal>, String> {

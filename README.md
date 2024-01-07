@@ -12,22 +12,22 @@ By default, Goel will use the user's AppCache directory for storing application 
 DATABASE_URL=./development.sqlite
 ```
 
-## Todo
+### Todo
 
-### Priority: High
+#### Priority: High
 
 - [ ] Automatic reminder when it's time to track goals (nagging)
-- [ ] Add form add goal validation error
 - [ ] Settings view with nagging time
 
-### Priority: Medium
+#### Priority: Medium
 
 - [ ] Goal date preview function implementation
+- [ ] Conceptiualize and implement goal reflection view
 - [ ] Ensure appdata directory is created on first launch
-- [ ] 
 
-### Priority: Low
+#### Priority: Low
 
+- [ ] Advanced form validation
 - [ ] Internationalization
 - [ ] Font scale setting
 - [ ] Open Window on tray icon left / double click
@@ -40,7 +40,6 @@ DATABASE_URL=./development.sqlite
 - [ ] Show some info regarding goal progress when finishing tracking a goal
 - [ ] Ensure data is not deleted on close in goal tracking view
 
-## Ideas
+### Ideas
 
 - Display quotes from literature about reaching your goals when finishing the tracking
-- Alternate barriers/success textfields

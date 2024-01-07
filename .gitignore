@@ -1,3 +1,4 @@
 node_modules
 dist
-src-tauri/developent.sqlite
+src-tauri/development.sqlite
+src-tauri/development.sqlite-journal

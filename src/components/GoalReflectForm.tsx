@@ -36,7 +36,7 @@ export default function GoalReflectForm(props: GoalReflectFormProps) {
 
     return <div class="bg-gaze-700/50 my-4 rounded-md px-4 py-4">
         <button type="button" class="rounded border border-white/10 px-3 py-2 text-calm-200 shadow-md bg-gaze-700 hover:bg-gaze-600 transition-colors font-bold flex gap-2 text-left items-center w-full" 
-        classList={{ "text-calm-400/50": props.finished }}
+        classList={{ "text-calm-400/50 shadow-sm opacity-50 hover:bg-gaze-700 cursor-default": props.finished }}
         onClick={() => {
             if(props.finished) {
                 return;

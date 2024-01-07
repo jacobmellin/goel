@@ -4,7 +4,6 @@
 
 ### Priority: High
 
-- [ ] Ensure data is not deleted on unexpand in goal tracking view
 - [ ] Implement skip function for goal tracking
 - [ ] Validation of goal tracking
 - [ ] Automatic reminder when it's time to track goals (nagging)

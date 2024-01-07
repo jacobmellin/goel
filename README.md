@@ -1,5 +1,17 @@
 # WIP: Goel
 
+## Development
+
+### Local Database for Development
+
+By default, Goel will use the user's AppCache directory for storing application data. For development, you can place a `.env` file in `src-tauri` with a `DATABASE_URL` environment variable set.
+
+**Example:**
+
+```bash
+DATABASE_URL=./development.sqlite
+```
+
 ## Todo
 
 ### Priority: High
@@ -12,6 +24,7 @@
 
 - [ ] Goal date preview function implementation
 - [ ] Ensure appdata directory is created on first launch
+- [ ] 
 
 ### Priority: Low
 

@@ -14,7 +14,7 @@ function App(props: any) {
             </div>
             <AddGoalModal />
             <InfoBar />
-            <footer class="text-xs text-center text-calm-500/50 px-2 mx-auto mb-4">Made with heart by jacobmellin | Please consider supporting: jacobmellin</footer>
+            <footer class="text-xs text-center text-calm-500/50 px-2 mx-auto mb-4">Made with ❤️  by jacobmellin <br/> Please consider buying me a coffee: <a target="_blank" class="text-calm-500 hover:text-calm-400 transition-all" href="https://ko-fi.com/jacobmellin">☕ ko-fi.com/jacobmellin</a> </footer>
         </main>
     );
 }

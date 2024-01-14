@@ -24,7 +24,6 @@ DATABASE_URL=./development.sqlite
 - [ ] Goal date preview function implementation
 - [ ] Conceptualize and implement goal reflection view
 - [ ] Ensure appdata directory is created on first launch
-- [ ] Fix my footer
 
 #### Priority: Low
 

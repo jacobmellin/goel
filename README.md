@@ -27,6 +27,7 @@ DATABASE_URL=./development.sqlite
 
 #### Priority: Low
 
+- [ ] Nice looking scroll bars cross platform
 - [ ] Display special screen after finishing tracking all pending goals
 - [ ] Make skip goal undoable
 - [ ] Move happiness bar on drag

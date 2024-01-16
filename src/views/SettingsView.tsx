@@ -5,11 +5,11 @@ export default function SettingsView() {
         <h1 class="my-4 text-lg font-bold text-soothe-400">Settings</h1>
         <div class="bg-gaze-700/50 my-4 rounded-md px-4 py-4 flex justify-between items-center">
             <div>
-                <p class="text-calm-400 font-bold">Remind time</p>
-                <p class="text-gaze-400 text-sm max-w-xs">Goel will automatically remind you of goals for which reflection on your progress is due at this time.</p>
+                <p class="text-calm-400 font-bold">Track Progress Reminder</p>
+                <p class="text-gaze-400 text-sm max-w-sm">Goel will automatically remind you of goals for which reflection on your progress is due at a time set here.</p>
             </div>
             <div class="flex">
-                <TimePicker onChange={(v) => console.log(v)} />
+                <TimePicker label="Remind time" labelRight onChange={(v) => console.log(v)} />
             </div>
         </div>
         <div class="bg-gaze-700/50 my-4 rounded-md px-4 py-4 flex justify-between items-center">

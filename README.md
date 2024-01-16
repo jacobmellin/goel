@@ -53,6 +53,7 @@ DATABASE_URL=./development.sqlite
 - [ ] Ensure appdata directory is created on first launch
 - [ ] Move happiness bar on drag
 - [ ] Goal edit function
+- [ ] Start implementing tests
 
 #### Priority: Low
 
@@ -76,6 +77,7 @@ DATABASE_URL=./development.sqlite
 - [ ] Show some info regarding goal progress when finishing tracking a goal
 - [ ] Ensure data is not deleted on close in goal tracking view
 - [ ] Automatic update
+- [ ] Handle invalid config file
 
 ### Ideas
 

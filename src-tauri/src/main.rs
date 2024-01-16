@@ -9,10 +9,36 @@ use tokio::{task, time};
 use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
 use tauri::{
     CustomMenuItem, Manager, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem,
-    WindowEvent,
+    WindowEvent, api::notification, tauri_build_context,
 };
 
 pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!("migrations");
+
+async fn remind_if_goals_pending() -> bool {
+    match db::get_goals_pending_reflection() {
+        Ok(goals) => {
+            if goals.len() > 0 {
+                let notification = notification::Notification::new("GoelReminder");
+
+                let _ = notification.title("Goel")
+                    .body("📝 Time to track your progress!")
+                    // TODO: Find a way to display goel icon here
+                    .icon("file://src-tauri/icons/icon.png")
+                    .show();
+
+                // TODO: Show tauri window
+                // Is it good usability to show the window here?
+                // Perhaps make it configurable?
+
+                return true
+            }
+        }
+        Err(err) => {
+            println!("Error getting pending goals: {:?}", err);
+        }
+    }
+    return false
+}
 
 #[tokio::main]
 async fn main() {
@@ -22,6 +48,22 @@ async fn main() {
     let quit = CustomMenuItem::new("quit".to_string(), "Quit");
     let hide = CustomMenuItem::new("hide".to_string(), "Hide");
 
+    let mut last_remind: chrono::NaiveDate = chrono::NaiveDate::from_ymd_opt(1970, 1, 1).unwrap();
+
+    // Check for remind time every minute
+    task::spawn(async move {
+        let mut interval = time::interval(std::time::Duration::from_secs(60));
+
+        loop {
+            interval.tick().await;
+            let remind_time = config::load().remind_time;
+            if (last_remind < chrono::Local::now().naive_local().date()) && (chrono::Local::now().time() >= remind_time) {
+                remind_if_goals_pending().await;
+                last_remind = chrono::Local::now().naive_local().date();
+            }
+        }
+    });
+
     let tray_menu = SystemTrayMenu::new()
         .add_item(hide)
         .add_native_item(SystemTrayMenuItem::Separator)
@@ -29,7 +71,7 @@ async fn main() {
 
     let tray = SystemTray::new().with_menu(tray_menu);
 
-    tauri::Builder::default()
+    let app = tauri::Builder::default()
         .system_tray(tray)
         .on_system_tray_event(|app, event| match event {
             SystemTrayEvent::LeftClick { .. } => {

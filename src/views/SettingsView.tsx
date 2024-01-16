@@ -16,7 +16,11 @@ export default function SettingsView() {
             <div class="flex">
                 <Show when={settings()}>
                     <TimePicker label="Remind time" initialTime={settings()?.remind_time} labelRight onChange={async (v) => {
-                        await invoke('save_settings', { settings: JSON.stringify({ remind_time : v.toISOString().slice(11,19) }) });
+                        await invoke('save_settings', { 
+                            settings: JSON.stringify({ 
+                                remind_time : v.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }).slice(0,5)
+                            })
+                        });
                     }} />
                 </Show>
             </div>

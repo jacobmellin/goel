@@ -51,6 +51,7 @@ DATABASE_URL=./development.sqlite
 - [ ] Goal date preview function implementation
 - [ ] Conceptualize and implement goal reflection view
 - [ ] Ensure appdata directory is created on first launch
+- [ ] Move happiness bar on drag
 
 #### Priority: Low
 
@@ -60,9 +61,8 @@ DATABASE_URL=./development.sqlite
 - [ ] Nice looking scroll bars cross platform
 - [ ] Display special screen after finishing tracking all pending goals
 - [ ] Make skip goal undoable
-- [ ] Move happiness bar on drag
 - [ ] Advanced form validation
-- [ ] Internationalization
+- [ ] Localization
 - [ ] Font scale setting
 - [ ] Open Window on tray icon left / double click
 - [ ] Animations for everything
@@ -73,6 +73,7 @@ DATABASE_URL=./development.sqlite
 - [ ] Implement trash with restore and permanent delete
 - [ ] Show some info regarding goal progress when finishing tracking a goal
 - [ ] Ensure data is not deleted on close in goal tracking view
+- [ ] Automatic update
 
 ### Ideas
 

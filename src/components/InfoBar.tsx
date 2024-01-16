@@ -22,7 +22,6 @@ const [infoBarColor, setInfoBarColor] = createSignal("bg-soothe-700");
 const [textColor, setTextColor] = createSignal("text-soothe-400");
 
 export const useInfoBar = () => {
-
     return {
         showInfo(
             text: string,

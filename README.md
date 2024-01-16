@@ -1,6 +1,34 @@
-# WIP: Goel
+# Goel
+
+Goel is a little tool that helps you keep track of your life goals.
+
+TODO: Image / Animated WebP
+
+## Features
+
+- Goel lets you define your life goals and will remind you of them regularly at specified intervals.
+- It will regularly ask you what your barriers and achievements you had since the last reminder, so as to give you a sense of what is holding you back and what is facilitating your progress.
+
+Since possibly any tool can be used wrongly: Please do your own research on productivity and motivation and consult a mental health professional first if you're dealing with mental health issues and think that Goel can help you!
+
+## Installation
+
+### Windows & macOS
+
+TODO
+
+### Linux
+
+TODO
 
 ## Development
+
+Goel is based on Tauri and uses Solid.js for the web based frontend. To start a development server, run:
+
+```bash
+npm install
+npm run tauri dev
+```
 
 ### Local Database for Development
 
@@ -12,11 +40,10 @@ By default, Goel will use the user's AppCache directory for storing application 
 DATABASE_URL=./development.sqlite
 ```
 
-### Todo
+### Feature wishlist / Yet to implement
 
 #### Priority: High
 
-- [ ] Settings view with nagging time
 - [ ] Automatic reminder when it's time to track goals (nagging)
 
 #### Priority: Medium
@@ -27,6 +54,9 @@ DATABASE_URL=./development.sqlite
 
 #### Priority: Low
 
+- [ ] Special window decoration based on platform
+- [ ] Switch for enabling/disabling reminder
+- [ ] Store all dates/times in UTC
 - [ ] Nice looking scroll bars cross platform
 - [ ] Display special screen after finishing tracking all pending goals
 - [ ] Make skip goal undoable

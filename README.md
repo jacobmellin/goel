@@ -52,9 +52,11 @@ DATABASE_URL=./development.sqlite
 - [ ] Conceptualize and implement goal reflection view
 - [ ] Ensure appdata directory is created on first launch
 - [ ] Move happiness bar on drag
+- [ ] Goal edit function
 
 #### Priority: Low
 
+- [ ] Manual track progress for goal
 - [ ] Special window decoration based on platform
 - [ ] Switch for enabling/disabling reminder
 - [ ] Store all dates/times in UTC

@@ -5,7 +5,7 @@ import { createEffect } from "solid-js";
 interface TimePickerProps {
     required?: boolean,
     label?: string,
-    initialTime?: Date,
+    initialTime?: string,
     labelRight?: boolean,
     onChange: (v: Date) => void
 }
@@ -51,7 +51,7 @@ function SelectableTime(props: SelectableTimeProps) {
 }
 
 export default function TimePicker(props: TimePickerProps) {
-    const [selectedTime, setSelectedTime] = createSignal(props.initialTime || new Date(0, 0, 0, 16, 30));
+    const [selectedTime, setSelectedTime] = createSignal(parseTime(props.initialTime || "15:27"));
     const [menuVisible, setMenuVisible] = createSignal(false);
     const inputTime = createMemo(() => {
         return selectedTime().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
@@ -60,7 +60,7 @@ export default function TimePicker(props: TimePickerProps) {
     let input: HTMLInputElement;
 
     createEffect(() => {
-        props.onChange(selectedTime());
+        setSelectedTime(parseTime(props.initialTime || "15:27"));
     });
 
     const handleTimeInput = (newInput: string) => {
@@ -68,6 +68,7 @@ export default function TimePicker(props: TimePickerProps) {
         try {
             parsedDate = parseTime(newInput);
             setSelectedTime(parsedDate);
+            props.onChange(selectedTime());
         } catch (e) {
             input.value = inputTime();
         }
@@ -94,6 +95,7 @@ export default function TimePicker(props: TimePickerProps) {
                 <For each={getTimes()}>{(time) =>
                     <SelectableTime time={time} onClick={() => {
                         setSelectedTime(time);
+                        props.onChange(selectedTime());
                         setMenuVisible(false);
                     }} />
                 }</For>

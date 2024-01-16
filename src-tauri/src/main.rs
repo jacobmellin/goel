@@ -4,6 +4,7 @@
 mod config;
 mod db;
 
+use config::GoelConfig;
 use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
 use tauri::{Manager, CustomMenuItem, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem, WindowEvent};
 
@@ -88,6 +89,27 @@ fn create_goal_reflection(reflect_data: &str) -> Result<String, String> {
     Ok("Success".into())
 }
 
+#[tauri::command]
+fn get_settings() -> Result<String, String> {
+    let cfg = config::load();
+    match serde_json::to_string(&cfg) {
+        Ok(v) => Ok(v), 
+        Err(err) => Err(err.to_string())
+    }
+}
+
+#[tauri::command]
+fn save_settings(settings: &str) -> Result<(), String> {
+    dbg!(settings);
+     match serde_json::from_str::<config::GoelConfigUpdate>(settings) {
+        Ok(config) => { 
+            config::merge(config);
+            Ok(()) 
+        },
+        Err(err) => Err(err.to_string()) 
+     }
+}
+
 fn main() {
     let db_connection = &mut db::establish_connection().unwrap();
     db_connection.run_pending_migrations(MIGRATIONS).unwrap();
@@ -157,7 +179,9 @@ fn main() {
             get_goal,
             update_goal,
             set_goal_removed,
-            create_goal_reflection
+            create_goal_reflection,
+            get_settings,
+            save_settings
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

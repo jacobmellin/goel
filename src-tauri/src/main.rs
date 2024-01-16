@@ -6,7 +6,10 @@ mod db;
 
 use config::GoelConfig;
 use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
-use tauri::{Manager, CustomMenuItem, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem, WindowEvent};
+use tauri::{
+    CustomMenuItem, Manager, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem,
+    WindowEvent,
+};
 
 pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!("migrations");
 
@@ -52,7 +55,7 @@ fn new_goal(goal_json: &str) -> Result<String, String> {
 
 #[tauri::command]
 fn get_goal(goal_id: &str) -> String {
-    // TODO: Do error handling and 
+    // TODO: Do error handling and
     // check what happens when no
     // goal can be found
     let goal = db::get_goal(goal_id);
@@ -69,9 +72,9 @@ fn set_goal_removed(goal_id: &str, removed: bool) -> Result<usize, String> {
 
 #[tauri::command]
 fn create_goal_reflection(reflect_data: &str) -> Result<String, String> {
-    let mut new_rating: db::models::GoalReflectionNew = match serde_json::from_str(reflect_data){
+    let mut new_rating: db::models::GoalReflectionNew = match serde_json::from_str(reflect_data) {
         Ok(data) => data,
-        Err(err) => return Err(err.to_string())
+        Err(err) => return Err(err.to_string()),
     };
 
     new_rating.date_created = chrono::Local::now().naive_local();
@@ -83,7 +86,7 @@ fn create_goal_reflection(reflect_data: &str) -> Result<String, String> {
 
     match result {
         Err(error) => return Err(error.to_string()),
-        Ok(rows) => rows
+        Ok(rows) => rows,
     };
 
     Ok("Success".into())
@@ -93,21 +96,20 @@ fn create_goal_reflection(reflect_data: &str) -> Result<String, String> {
 fn get_settings() -> Result<String, String> {
     let cfg = config::load();
     match serde_json::to_string(&cfg) {
-        Ok(v) => Ok(v), 
-        Err(err) => Err(err.to_string())
+        Ok(v) => Ok(v),
+        Err(err) => Err(err.to_string()),
     }
 }
 
 #[tauri::command]
 fn save_settings(settings: &str) -> Result<(), String> {
-    dbg!(settings);
-     match serde_json::from_str::<config::GoelConfigUpdate>(settings) {
-        Ok(config) => { 
+    match serde_json::from_str::<config::GoelConfigUpdate>(settings) {
+        Ok(config) => {
             config::merge(config);
-            Ok(()) 
-        },
-        Err(err) => Err(err.to_string()) 
-     }
+            Ok(())
+        }
+        Err(err) => Err(err.to_string()),
+    }
 }
 
 fn main() {
@@ -130,10 +132,10 @@ fn main() {
             SystemTrayEvent::LeftClick { .. } => {
                 println!("left click!");
                 todo!("implement left click show action");
-            },
+            }
             SystemTrayEvent::DoubleClick { .. } => {
                 println!("double click");
-            },
+            }
             SystemTrayEvent::MenuItemClick { id, .. } => {
                 let item_handle = app.tray_handle().get_item(&id);
                 match id.as_str() {
@@ -146,9 +148,9 @@ fn main() {
                             window.show().unwrap();
                             item_handle.set_title("Hide").unwrap();
                         }
-                    },
+                    }
                     "quit" => {
-                       app.exit(0); 
+                        app.exit(0);
                     }
                     _ => {}
                 }
@@ -158,7 +160,7 @@ fn main() {
         .setup(|app| {
             let item_handle = app.tray_handle().get_item("hide");
             let window = app.get_window("main").unwrap();
-            
+
             let window_ = window.clone();
 
             window.on_window_event(move |event| match event {
@@ -166,7 +168,7 @@ fn main() {
                     if !window_.is_visible().unwrap() {
                         item_handle.set_title("Show").unwrap();
                     }
-                },
+                }
                 _ => {}
             });
 

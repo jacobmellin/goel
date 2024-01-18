@@ -4,7 +4,7 @@ use chrono::NaiveDateTime;
 use diesel::{Queryable, Selectable, Insertable, associations::Associations, Identifiable};
 use serde::{Serialize, Deserialize};
 
-#[derive(Debug, Queryable, Serialize, Selectable, Identifiable)]
+#[derive(Debug, Clone, Queryable, Serialize, Selectable, Identifiable)]
 #[diesel(table_name = super::schema::goals)]
 #[diesel(check_for_backend(diesel::sqlite::Sqlite))]
 pub struct Goal {

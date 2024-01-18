@@ -3,9 +3,19 @@ import "./App.css";
 import AddGoalModal from "./components/AddGoalModal";
 import Header from "./components/Header";
 
-import { InfoBar } from './components/InfoBar';
+import { InfoBar, useInfoBar } from './components/InfoBar';
+
+import { listen } from '@tauri-apps/api/event';
 
 function App(props: any) {
+    const infoBar = useInfoBar();
+    listen("goal-reminded", (data: any) => {
+        console.log("goal-reminded", data);
+
+        // TODO: Navigate to "Track" if window not visible!
+        infoBar.showInfo("It is time to track progress on your goals!"); 
+    });
+
     return (
         <main class="flex flex-col h-full">
             <Header />

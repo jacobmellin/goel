@@ -6,15 +6,25 @@ mod db;
 mod commands;
 
 use tokio::{task, time};
-use diesel_migrations::{embed_migrations, EmbeddedMigrations, MigrationHarness};
+use diesel_migrations::{
+    embed_migrations,
+    EmbeddedMigrations,
+    MigrationHarness};
 use tauri::{
-    CustomMenuItem, Manager, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem,
-    WindowEvent, api::notification, tauri_build_context,
+    CustomMenuItem,
+    Manager, 
+    SystemTray, 
+    SystemTrayEvent, 
+    SystemTrayMenu, 
+    SystemTrayMenuItem,
+    WindowEvent,
+    api::notification, 
+    AppHandle,
 };
 
 pub const MIGRATIONS: EmbeddedMigrations = embed_migrations!("migrations");
 
-async fn remind_if_goals_pending() -> bool {
+async fn remind_if_goals_pending(app_handle: &AppHandle) -> bool {
     match db::get_goals_pending_reflection() {
         Ok(goals) => {
             if goals.len() > 0 {
@@ -26,10 +36,12 @@ async fn remind_if_goals_pending() -> bool {
                     .icon("file://src-tauri/icons/icon.png")
                     .show();
 
-                // TODO: Show tauri window
-                // Is it good usability to show the window here?
-                // Perhaps make it configurable?
+                let window = app_handle.get_window("main").unwrap();
+                if config::load().show_when_reminding && !window.is_visible().unwrap() {
+                    window.show().unwrap(); 
+                }
 
+                app_handle.emit_to("main", "goal-reminded", goals).unwrap();
                 return true
             }
         }
@@ -40,15 +52,10 @@ async fn remind_if_goals_pending() -> bool {
     return false
 }
 
-#[tokio::main]
-async fn main() {
-    let db_connection = &mut db::establish_connection().unwrap();
-    db_connection.run_pending_migrations(MIGRATIONS).unwrap();
-
-    let quit = CustomMenuItem::new("quit".to_string(), "Quit");
-    let hide = CustomMenuItem::new("hide".to_string(), "Hide");
-
+fn init_pending_goal_reminder(app_handle: &AppHandle) {
+    println!("Initializing pending goal reminder...");
     let mut last_remind: chrono::NaiveDate = chrono::NaiveDate::from_ymd_opt(1970, 1, 1).unwrap();
+    let app_handle_ = app_handle.clone();
 
     // Check for remind time every minute
     task::spawn(async move {
@@ -57,12 +64,27 @@ async fn main() {
         loop {
             interval.tick().await;
             let remind_time = config::load().remind_time;
-            if (last_remind < chrono::Local::now().naive_local().date()) && (chrono::Local::now().time() >= remind_time) {
-                remind_if_goals_pending().await;
+            let today = chrono::Local::now().naive_local().date();
+            let now = chrono::Local::now().time();
+            dbg!(&remind_time);
+            dbg!(&today);
+            dbg!(&now);
+            if (last_remind < today) && (now >= remind_time) {
+                remind_if_goals_pending(&app_handle_).await;
                 last_remind = chrono::Local::now().naive_local().date();
             }
         }
     });
+}
+
+#[tokio::main]
+async fn main() {
+    let db_connection = &mut db::establish_connection().unwrap();
+    db_connection.run_pending_migrations(MIGRATIONS).unwrap();
+
+    let quit = CustomMenuItem::new("quit".to_string(), "Quit");
+    let hide = CustomMenuItem::new("hide".to_string(), "Hide");
+
 
     let tray_menu = SystemTrayMenu::new()
         .add_item(hide)
@@ -105,7 +127,6 @@ async fn main() {
         .setup(|app| {
             let item_handle = app.tray_handle().get_item("hide");
             let window = app.get_window("main").unwrap();
-
             let window_ = window.clone();
 
             window.on_window_event(move |event| match event {
@@ -116,6 +137,8 @@ async fn main() {
                 }
                 _ => {}
             });
+
+            init_pending_goal_reminder(&app.app_handle());
 
             Ok(())
         })

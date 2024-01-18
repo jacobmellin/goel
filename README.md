@@ -44,11 +44,10 @@ DATABASE_URL=./development.sqlite
 
 #### Priority: High
 
-- [ ] Automatic reminder when it's time to track goals (nagging)
+- [ ] Goal date preview function implementation
 
 #### Priority: Medium
 
-- [ ] Goal date preview function implementation
 - [ ] Conceptualize and implement goal reflection view
 - [ ] Ensure appdata directory is created on first launch
 - [ ] Move happiness bar on drag

@@ -44,19 +44,23 @@ DATABASE_URL=./development.sqlite
 
 #### Priority: High
 
-#### Priority: Medium
-
 - [ ] Add nice looking icon for reminder notification
 - [ ] Navigate to Track if window not visible and reminder 
+
+#### Priority: Medium
+
 - [ ] Conceptualize and implement goal reflection view
 - [ ] Ensure appdata directory is created on first launch
-- [ ] Move happiness bar on drag
-- [ ] Goal edit function
 - [ ] Start implementing tests
-- [ ] Add Github Actions
+- [ ] Start implementing localization
+- [ ] Goal edit function
+- [ ] Handle invalid config file
+- [ ] Focus trap for modal
 
 #### Priority: Low
 
+- [ ] Move happiness bar on drag
+- [ ] Add Github Actions
 - [ ] Manual track progress for goal
 - [ ] Special window decoration based on platform
 - [ ] Switch for enabling/disabling reminder
@@ -65,19 +69,15 @@ DATABASE_URL=./development.sqlite
 - [ ] Display special screen after finishing tracking all pending goals
 - [ ] Make skip goal undoable
 - [ ] Advanced form validation
-- [ ] Localization
 - [ ] Font scale setting
 - [ ] Open Window on tray icon left / double click
 - [ ] Animations for everything
 - [ ] Add shortcuts handling
 - [ ] Close add goal modal on esc
 - [ ] Add tooltips
-- [ ] Focus trap for modal
 - [ ] Implement trash with restore and permanent delete
 - [ ] Show some info regarding goal progress when finishing tracking a goal
-- [ ] Ensure data is not deleted on close in goal tracking view
 - [ ] Automatic update
-- [ ] Handle invalid config file
 
 ### Ideas
 

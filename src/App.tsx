@@ -1,3 +1,4 @@
+import { useNavigate } from "@solidjs/router";
 import "./App.css";
 
 import AddGoalModal from "./components/AddGoalModal";
@@ -6,13 +7,21 @@ import Header from "./components/Header";
 import { InfoBar, useInfoBar } from './components/InfoBar';
 
 import { listen } from '@tauri-apps/api/event';
+import { appWindow } from '@tauri-apps/api/window';
 
 function App(props: any) {
     const infoBar = useInfoBar();
+    const navigate = useNavigate();
+
     listen("goal-reminded", (data: any) => {
         console.log("goal-reminded", data);
 
-        // TODO: Navigate to "Track" if window not visible!
+        appWindow.isVisible().then((visible) => {
+            if (!visible) {
+               navigate("/track"); 
+            } 
+        })
+
         infoBar.showInfo("It is time to track progress on your goals!"); 
     });
 

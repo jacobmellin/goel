@@ -44,15 +44,16 @@ DATABASE_URL=./development.sqlite
 
 #### Priority: High
 
-- [ ] Goal date preview function implementation
-
 #### Priority: Medium
 
+- [ ] Add nice looking icon for reminder notification
+- [ ] Navigate to Track if window not visible and reminder 
 - [ ] Conceptualize and implement goal reflection view
 - [ ] Ensure appdata directory is created on first launch
 - [ ] Move happiness bar on drag
 - [ ] Goal edit function
 - [ ] Start implementing tests
+- [ ] Add Github Actions
 
 #### Priority: Low
 

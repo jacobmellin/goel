@@ -28,6 +28,8 @@ async fn remind_if_goals_pending(app_handle: &AppHandle) -> bool {
     match db::get_goals_pending_reflection() {
         Ok(goals) => {
             if goals.len() > 0 {
+                app_handle.emit_to("main", "goal-reminded", &goals).unwrap();
+
                 let notification = notification::Notification::new("GoelReminder");
 
                 let _ = notification.title("Goel")
@@ -38,10 +40,10 @@ async fn remind_if_goals_pending(app_handle: &AppHandle) -> bool {
 
                 let window = app_handle.get_window("main").unwrap();
                 if config::load().show_when_reminding && !window.is_visible().unwrap() {
-                    window.show().unwrap(); 
+                    window.show().unwrap();
+                    app_handle.emit_to("main", "shown-after-remind", &goals.len()).unwrap();
                 }
 
-                app_handle.emit_to("main", "goal-reminded", goals).unwrap();
                 return true
             }
         }

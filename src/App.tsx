@@ -7,22 +7,17 @@ import Header from "./components/Header";
 import { InfoBar, useInfoBar } from './components/InfoBar';
 
 import { listen } from '@tauri-apps/api/event';
-import { appWindow } from '@tauri-apps/api/window';
 
 function App(props: any) {
     const infoBar = useInfoBar();
     const navigate = useNavigate();
 
-    listen("goal-reminded", (data: any) => {
-        console.log("goal-reminded", data);
-
-        appWindow.isVisible().then((visible) => {
-            if (!visible) {
-               navigate("/track"); 
-            } 
-        })
-
+    listen("goal-reminded", () => {
         infoBar.showInfo("It is time to track progress on your goals!"); 
+    });
+
+    listen("shown-after-remind", () => {
+        navigate("/track"); 
     });
 
     return (

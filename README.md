@@ -44,11 +44,10 @@ DATABASE_URL=./development.sqlite
 
 #### Priority: High
 
-- [ ] Navigate to Track if window not visible and reminder 
+- [ ] Conceptualize and implement goal reflection view
 
 #### Priority: Medium
 
-- [ ] Conceptualize and implement goal reflection view
 - [ ] Ensure appdata directory is created on first launch
 - [ ] Start implementing tests
 - [ ] Start implementing localization

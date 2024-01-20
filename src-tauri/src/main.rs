@@ -58,7 +58,6 @@ async fn remind_if_goals_pending(app_handle: &AppHandle) -> bool {
 }
 
 fn init_pending_goal_reminder(app_handle: &AppHandle) {
-    println!("Initializing pending goal reminder...");
     let mut last_remind: chrono::NaiveDate = chrono::NaiveDate::from_ymd_opt(1970, 1, 1).unwrap();
     let app_handle_ = app_handle.clone();
 

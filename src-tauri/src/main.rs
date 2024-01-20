@@ -32,10 +32,13 @@ async fn remind_if_goals_pending(app_handle: &AppHandle) -> bool {
 
                 let notification = notification::Notification::new("GoelReminder");
 
+                let icon_path = app_handle.path_resolver()
+                    .resolve_resource("icons/icon.png").unwrap();
+
                 let _ = notification.title("Goel")
                     .body("📝 Time to track your progress!")
                     // TODO: Find a way to display goel icon here
-                    .icon("file://src-tauri/icons/icon.png")
+                    .icon(icon_path.display().to_string())
                     .show();
 
                 let window = app_handle.get_window("main").unwrap();
@@ -68,9 +71,7 @@ fn init_pending_goal_reminder(app_handle: &AppHandle) {
             let remind_time = config::load().remind_time;
             let today = chrono::Local::now().naive_local().date();
             let now = chrono::Local::now().time();
-            dbg!(&remind_time);
-            dbg!(&today);
-            dbg!(&now);
+
             if (last_remind < today) && (now >= remind_time) {
                 remind_if_goals_pending(&app_handle_).await;
                 last_remind = chrono::Local::now().naive_local().date();
@@ -141,6 +142,7 @@ async fn main() {
             });
 
             init_pending_goal_reminder(&app.app_handle());
+
 
             Ok(())
         })

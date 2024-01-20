@@ -44,7 +44,6 @@ DATABASE_URL=./development.sqlite
 
 #### Priority: High
 
-- [ ] Add nice looking icon for reminder notification
 - [ ] Navigate to Track if window not visible and reminder 
 
 #### Priority: Medium

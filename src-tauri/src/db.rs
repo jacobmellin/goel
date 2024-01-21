@@ -94,7 +94,7 @@ pub fn set_goal_removed(goal_id: &str, removed: bool) -> Result<usize, String> {
     if_err_to_string(result)
 }
 
-pub fn get_reflections(goal_id: &str) -> Result<Vec<GoalReflection>, String> {
+pub fn get_goal_reflections(goal_id: &str) -> Result<Vec<GoalReflection>, String> {
     let connection = &mut establish_connection()?;
     let result = schema::goal_reflections::dsl::goal_reflections
         .filter(schema::goal_reflections::dsl::goal_id.eq(goal_id))

@@ -82,6 +82,19 @@ pub fn create_goal_reflection(reflect_data: &str) -> Result<String, String> {
 }
 
 #[tauri::command]
+pub fn get_goal_reflections(goal_id: &str) -> String {
+    // TODO: Do error handling and
+    // check what happens when no
+    // goal can be found
+    let reflections = db::get_goal_reflections(goal_id);
+    
+    match reflections {
+        Ok(reflections) => serde_json::to_string(&reflections).unwrap(),
+        Err(err) => err.to_string(),
+    }
+}
+
+#[tauri::command]
 pub fn get_settings() -> Result<String, String> {
     let cfg = config::load();
     match serde_json::to_string(&cfg) {

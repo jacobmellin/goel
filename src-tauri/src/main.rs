@@ -154,7 +154,8 @@ async fn main() {
             commands::set_goal_removed,
             commands::create_goal_reflection,
             commands::get_settings,
-            commands::save_settings
+            commands::save_settings,
+            commands::get_goal_reflections
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

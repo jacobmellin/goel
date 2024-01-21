@@ -62,6 +62,8 @@ TODO: Don't compile this into production
 
 #### Priority: Low
 
+- [ ] Add Eslint
+- [ ] Do processing on success reflection input
 - [ ] Move happiness bar on drag
 - [ ] Add Github Actions
 - [ ] Manual track progress for goal
@@ -82,6 +84,7 @@ TODO: Don't compile this into production
 - [ ] Show some info regarding goal progress when finishing tracking a goal
 - [ ] Automatic update
 - [ ] Selectable display types for goel track history (horizontal, vertical, thread)
+- [ ] Convert db and tauri command errors to an error type that supports previous errors
 
 ### Ideas
 

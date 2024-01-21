@@ -3,9 +3,7 @@ import "./App.css";
 
 import AddGoalModal from "./components/AddGoalModal";
 import Header from "./components/Header";
-
 import { InfoBar, useInfoBar } from './components/InfoBar';
-
 import { listen } from '@tauri-apps/api/event';
 
 function App(props: any) {

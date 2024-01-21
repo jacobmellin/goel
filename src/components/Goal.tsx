@@ -4,6 +4,7 @@ import { TrackingInterval } from '../types/Goal';
 import { createEffect, createSignal } from 'solid-js';
 import { invoke } from '@tauri-apps/api';
 import { useInfoBar } from './InfoBar';
+import { A } from '@solidjs/router';
 
 interface GoalProps {
     text: string,
@@ -41,7 +42,7 @@ function Goal(props: GoalProps) {
     };
 
     return (
-        <div class="bg-gaze-700/40 rounded-md border-white/10 border shadow-md text-soothe-200 flex flex-col hover:border-orange-300/50 hover:bg-calm-400/20 hover:cursor-pointer transition-colors">
+        <A href={`/goal/${props.id}`} class="bg-gaze-700/40 rounded-md border-white/10 border shadow-md text-soothe-200 flex flex-col hover:border-orange-300/50 hover:bg-calm-400/20 hover:cursor-pointer transition-colors">
             <div class="p-4 font-medium flex-1">{props.text}</div>
             <div class="flex w-full border-t-white/10 border-t">
                 <div class="p-2 text-calm-500 tracking-wider font-normal text-sm uppercase flex-1">{trackingInfo()}</div>
@@ -56,7 +57,7 @@ function Goal(props: GoalProps) {
                     <EvaIcon name="trash-outline" class="h-[18px] fill-red-400/70" />
                 </button>
             </div>
-        </div>
+        </A>
     );
 }
 

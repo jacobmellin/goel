@@ -57,6 +57,8 @@ TODO: Don't compile this into production
 - [ ] Goal edit function
 - [ ] Handle invalid config file
 - [ ] Focus trap for modal
+- [ ] Support Mouse Back button where applicable
+- [ ] Dropdown button for remind interval select
 
 #### Priority: Low
 
@@ -79,6 +81,7 @@ TODO: Don't compile this into production
 - [ ] Implement trash with restore and permanent delete
 - [ ] Show some info regarding goal progress when finishing tracking a goal
 - [ ] Automatic update
+- [ ] Selectable display types for goel track history (horizontal, vertical, thread)
 
 ### Ideas
 

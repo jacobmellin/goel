@@ -23,7 +23,7 @@ TODO
 
 ## Development
 
-Goel is based on Tauri and uses Solid.js for the web based frontend. To start a development server, run:
+Goel is based on [Tauri](https://tauri.app) and uses [Solid.js](https://www.solidjs.com) for the web based frontend. To start a development server, run:
 
 ```bash
 npm install
@@ -40,6 +40,8 @@ By default, Goel will use the user's AppCache directory for storing application 
 DATABASE_URL=./development.sqlite
 ```
 
+TODO: Don't compile this into production
+
 ### Feature wishlist / Yet to implement
 
 #### Priority: High
@@ -48,6 +50,7 @@ DATABASE_URL=./development.sqlite
 
 #### Priority: Medium
 
+- [ ] Fix time parsing
 - [ ] Ensure appdata directory is created on first launch
 - [ ] Start implementing tests
 - [ ] Start implementing localization

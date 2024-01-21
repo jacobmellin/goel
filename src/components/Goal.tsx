@@ -47,13 +47,8 @@ function Goal(props: GoalProps) {
                 <div class="p-2 text-calm-500 tracking-wider font-normal text-sm uppercase flex-1">{trackingInfo()}</div>
                 <button
                     onClick={() => console.log("goal")}
-                    class="border-l-white/10 border-l py-2 px-3 inline-flex hover:bg-orange-300/20 transition-colors">
+                    class="border-l-white/10 border-l py-2 px-3 inline-flex hover:bg-orange-300/20 transition-colors items-center justify-content-center">
                     <EvaIcon name="edit-2-outline" class="h-[18px] fill-orange-300/70" />
-                </button>
-                <button
-                    onClick={() => console.log("goal")}
-                    class="border-l-white/10 border-l py-2 px-3 inline-flex hover:bg-orange-300/20 transition-colors">
-                    <EvaIcon name="file-add-outline" class="h-[18px] fill-orange-300/70" />
                 </button>
                 <button
                     onClick={() => deleteGoal()}

@@ -64,7 +64,6 @@ TODO: Don't compile this into production
 
 - [ ] Add Eslint
 - [ ] Do processing on success reflection input
-- [ ] Move happiness bar on drag
 - [ ] Add Github Actions
 - [ ] Manual track progress for goal
 - [ ] Special window decoration based on platform

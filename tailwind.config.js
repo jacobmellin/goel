@@ -6,6 +6,9 @@ export default {
     ],
     theme: {
         extend: {
+            transitionProperty: {
+                'width' : 'width'
+            },
             screens: {
                 'sm': '540px'
             },

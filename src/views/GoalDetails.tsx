@@ -6,14 +6,14 @@ import { For, createMemo, createResource } from "solid-js";
 import { invoke } from "@tauri-apps/api";
 
 function GoalReflection(props: any) {
-    const happinessMap: { [key: number]: string } = {
-        101: "Very Happy",
-        75: "Happy",
-        65: "Kind of Happy",
-        50: "Neutral",
-        25: "Kind of Unhappy",
-        10: "Unhappy",
-        0: "Very Unhappy"
+    const happinessMap: { [key: number]: { text: string, class: string } } = {
+        101: { text: "Very Happy", class: "text-green-300" },
+        75:  { text: "Happy", class: "text-emerald-400" },
+        65:  { text: "Kind of Happy", class: "text-yellow-400" },
+        50:  { text: "Neutral", class: "text-gray-500"},
+        25:  { text: "Kind of Unhappy", class: "text-soothe-300" },
+        10:  { text: "Unhappy", class: "text-red-700" },
+        0:   { text: "Very Unhappy", class: "text-red-600" }
     };
 
     const happinessText = createMemo(() => {
@@ -33,8 +33,8 @@ function GoalReflection(props: any) {
         </div>
         <p class="text-gaze-200 my-2"><span class="font-bold text-sm uppercase text-soothe-400">What went good:</span><br /> {props.reflection.barriers_reflection}</p>
         <p class="text-gaze-200"><span class="font-bold text-sm uppercase text-soothe-400">Barriers to overcome:</span><br />{props.reflection.success_reflection}</p>
-        <div class="bg-gaze-700/50 rounded-md px-4 py-3 mt-4 text-soothe-200 flex gap-2 flex-row items-center">
-        <p>You were <span class="uppercase text-gaze-300 text-sm">{happinessText()}</span> with the progress on your goal here.</p>
+        <div class="text-sm bg-gaze-700/50 rounded-md px-4 py-3 mt-4 text-soothe-200 flex gap-2 flex-row items-center">
+        <p>You felt <span class={`uppercase ${happinessText().class} text-sm`}>{happinessText().text}</span> with the progress on your goal here.</p>
         <div class="rounded-md bg-green-400/50 w-10 h-10 flex items-center justify-center">
         {props.reflection.rating} 
         </div>

@@ -47,6 +47,7 @@ TODO: Don't compile this into production
 #### Priority: High
 
 - [ ] Goal edit function
+- [ ] Goal steps to completion
 
 #### Priority: Medium
 

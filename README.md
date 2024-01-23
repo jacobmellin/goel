@@ -46,15 +46,14 @@ TODO: Don't compile this into production
 
 #### Priority: High
 
-- [ ] Conceptualize and implement goal reflection view
+- [ ] Goal edit function
 
 #### Priority: Medium
 
-- [ ] Fix time parsing
+- [ ] Ensure correct formatting for displayed reflections
 - [ ] Ensure appdata directory is created on first launch
 - [ ] Start implementing tests
 - [ ] Start implementing localization
-- [ ] Goal edit function
 - [ ] Handle invalid config file
 - [ ] Focus trap for modal
 - [ ] Support Mouse Back button where applicable

@@ -21,10 +21,10 @@ export default function SettingsView() {
                         try {
                             await invoke('save_settings', {
                                 settings: JSON.stringify({
-                                    remind_time: v.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }).slice(0, 5)
+                                    remind_time: v.toLocaleTimeString('de')
                                 })
                             });
-                            infoBar.showInfo("Remind time saved!");
+                            infoBar.showInfo(`Remind time set!`);
                         } catch (e: any) {
                             infoBar.showError("Error saving reimnd time: " + e.toString());
                         }

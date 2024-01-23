@@ -40,10 +40,15 @@ function parseTime(text: string) {
         m = parseInt(time![2], 10) || 0;
     }
 
+    if(text.toLowerCase().includes("pm") && h !== 12) {
+        h = 12 + h;
+    }
+
     var d = new Date();
     d.setHours(h);
     d.setMinutes(m);
     return d;
+
 }
 
 function SelectableTime(props: SelectableTimeProps) {
@@ -68,7 +73,7 @@ export default function TimePicker(props: TimePickerProps) {
         try {
             parsedDate = parseTime(newInput);
             setSelectedTime(parsedDate);
-            props.onChange(selectedTime());
+            props.onChange(parsedDate);
         } catch (e) {
             input.value = inputTime();
         }

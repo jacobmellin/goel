@@ -52,7 +52,7 @@ function Goal(props: GoalProps) {
                     <EvaIcon name="edit-2-outline" class="h-[18px] fill-orange-300/70" />
                 </button>
                 <button
-                    onClick={() => deleteGoal()}
+                    onClick={(e: any) => { e.preventDefault(); deleteGoal(); }}
                     class="border-l-white/10 border-l py-2 px-3 inline-flex hover:bg-orange-300/20 transition-colors items-center justify-content-center">
                     <EvaIcon name="trash-outline" class="h-[18px] fill-red-400/70" />
                 </button>

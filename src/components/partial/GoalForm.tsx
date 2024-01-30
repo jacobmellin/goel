@@ -13,7 +13,8 @@ import { useSettings } from "../../store/settings";
 interface GoalFormProps {
     goal: Partial<GoalRecord>,
     onSubmit: (goal: Partial<GoalRecord>) => void,
-    onCancel: () => void
+    onCancel: () => void,
+    confirmLabel: string
 }
 
 interface TrackProgressOption {
@@ -88,6 +89,7 @@ export default function GoalForm(props: GoalFormProps) {
         }}>
             <div class="my-4">
                 <TextInput 
+                    initialValue={props.goal.description}
                     required
                     label="Goal Description"
                     placeholder="Enter your goal here"
@@ -97,7 +99,11 @@ export default function GoalForm(props: GoalFormProps) {
             <div class="flex gap-4 my-4 items-end">
                 <div class="grow">
                     <SelectInput
-                        initialValue={trackProgressOpts[0]}
+                        initialValue={
+                            props.goal.tracking_freq ?
+                                trackProgressOpts
+                                    .find(o => o.name === props.goal.tracking_freq)
+                                        : trackProgressOpts[0]}
                         label="Remind / Track Progress"
                         format={optionsFormat} options={trackProgressOpts} 
                         onChange={(v: TrackProgressOption) => {
@@ -109,6 +115,7 @@ export default function GoalForm(props: GoalFormProps) {
                     <div class="grow max-w-32">
                         <NumberInput default={2} min={2} 
                                      max={365} label="Number of Days"
+                                     initialValue={props.goal.tracking_days_interval}
                                      onChange={
                                         (n) => setNewGoal({ tracking_days_interval: n })} />
                     </div>
@@ -124,7 +131,7 @@ export default function GoalForm(props: GoalFormProps) {
                 nextRemindDate()?.toLocaleDateString([], { hour: 'numeric', minute: 'numeric', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
             }.</div>
             <div class="flex mt-4 pt-2 gap-2 flex-row justify-space-between">
-                <ButtonPrimary submit>Add Goal</ButtonPrimary>
+                <ButtonPrimary submit>{props.confirmLabel}</ButtonPrimary>
                 <Button onClick={props.onCancel}>Cancel</Button>
             </div>
         </form>

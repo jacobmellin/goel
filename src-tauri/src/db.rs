@@ -84,6 +84,19 @@ pub fn insert_goal(new_goal: GoalNew) -> Result<usize, String> {
     if_err_to_string(result)
 }
 
+pub fn update_goal(goal_id: &str,  updated_goal: Goal) -> Result<(), String> {
+    let connection = &mut establish_connection()?;
+
+    let goal = schema::goals::dsl::goals.find(goal_id);
+
+    diesel::update(goal).set(schema::goals::dsl::description.eq(updated_goal.description)).execute(connection).unwrap();
+    diesel::update(goal).set(schema::goals::dsl::tracking_freq.eq(updated_goal.tracking_freq)).execute(connection).unwrap();
+    diesel::update(goal).set(schema::goals::dsl::tracking_days_interval.eq(updated_goal.tracking_days_interval)).execute(connection).unwrap();
+    diesel::update(goal).set(schema::goals::dsl::date_modified.eq(chrono::Local::now().naive_local())).execute(connection).unwrap();
+
+    Ok(())
+}
+
 pub fn set_goal_removed(goal_id: &str, removed: bool) -> Result<usize, String> {
     let connection = &mut establish_connection()?;
 

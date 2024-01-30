@@ -32,7 +32,6 @@ export default function AddGoalModal() {
     const [, refetchGoals] = useGoals();
 
     const createGoal = async (goal: Partial<GoalRecord>) => {
-        console.log("hi");
         try {
             await invoke("new_goal", { goalJson: JSON.stringify(goal) });
             refetchGoals();
@@ -43,8 +42,11 @@ export default function AddGoalModal() {
         }
     };
 
-    return <Modal visible={state.visible} title="Add a new goal">
-        <GoalForm goal={{}} 
+    return <Modal
+                visible={state.visible}
+                title="Add a new goal">
+        <GoalForm goal={{}}
+                  confirmLabel="Create Goal"
                   onCancel={() => setState({ visible: false })} 
                   onSubmit={(g: Partial<GoalRecord>) => createGoal(g)}
              />

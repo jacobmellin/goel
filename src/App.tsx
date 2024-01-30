@@ -5,8 +5,10 @@ import AddGoalModal from "./components/AddGoalModal";
 import Header from "./components/Header";
 import { InfoBar, useInfoBar } from './components/InfoBar';
 import { listen } from '@tauri-apps/api/event';
+import EditGoalModal from "./components/EditGoalModal";
+import { JSXElement } from "solid-js";
 
-function App(props: any) {
+function App(props: { children: JSXElement }) {
     const infoBar = useInfoBar();
     const navigate = useNavigate();
 
@@ -25,6 +27,7 @@ function App(props: any) {
                 {props.children}
             </div>
             <AddGoalModal />
+            <EditGoalModal />
             <InfoBar />
             <footer class="text-xs text-center text-calm-500/50 px-2 mx-auto mb-4">Made with ❤️  by jacobmellin | Please consider buying me a coffee: <a target="_blank" class="text-calm-500 hover:text-calm-400 transition-all" href="https://ko-fi.com/jacobmellin">☕ ko-fi.com/jacobmellin</a> </footer>
         </main>

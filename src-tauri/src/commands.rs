@@ -43,16 +43,28 @@ pub fn new_goal(goal_json: &str) -> Result<String, String> {
 }
 
 #[tauri::command]
-pub fn get_goal(goal_id: &str) -> String {
+pub fn get_goal(goal_id: &str) -> Result<String, String> {
     // TODO: Do error handling and
     // check what happens when no
     // goal can be found
     let goal = db::get_goal(goal_id);
-    serde_json::to_string(&goal).unwrap()
+    match serde_json::to_string(&goal) {
+        Ok(data) => Ok(data),
+        Err(err) => Err(err.to_string())
+    }
 }
 
 #[tauri::command]
-pub fn update_goal(id: &str, goal_raw: &str) {}
+pub fn update_goal(id: &str, goal_raw: &str) -> Result<String, String> {
+    let goal: db::models::Goal = match serde_json::from_str(goal_raw) {
+        Ok(goal) => goal,
+        Err(err) => return Err(err.to_string())
+    };
+
+    db::update_goal(id, goal)?;
+
+    Ok("Success".into())
+}
 
 #[tauri::command]
 pub fn set_goal_removed(goal_id: &str, removed: bool) -> Result<usize, String> {

@@ -1,10 +1,10 @@
 use std::ops::Add;
 
 use chrono::NaiveDateTime;
-use diesel::{Queryable, Selectable, Insertable, associations::Associations, Identifiable};
+use diesel::{Queryable, Selectable, Insertable, associations::Associations, Identifiable, query_builder::AsChangeset};
 use serde::{Serialize, Deserialize};
 
-#[derive(Debug, Clone, Queryable, Serialize, Selectable, Identifiable)]
+#[derive(AsChangeset, Debug, Clone, Queryable, Serialize, Deserialize, Selectable, Identifiable)]
 #[diesel(table_name = super::schema::goals)]
 #[diesel(check_for_backend(diesel::sqlite::Sqlite))]
 pub struct Goal {

@@ -89,6 +89,7 @@ jobs:
           mkdir -p ${{ needs.setup.outputs.name_bin }}
           cp -fr ${{ needs.setup.outputs.deb_pkg_path }}${{ needs.setup.outputs.deb_pkg_name }} ${{ needs.setup.outputs.name_bin }}/${{ needs.setup.outputs.deb_pkg_renamed }} 
           cat <<EOF > ./${{ needs.setup.outputs.name_bin }}/PKGBUILD
+            # Maintainer: Jacob Mellin <hello@jacobmellin.de>
             pkgname=${{ needs.setup.outputs.name_bin }}
             pkgver=${{ needs.setup.outputs.version }}
             md5sums=('$(md5sum ${{ needs.setup.outputs.name_bin }}/${{ needs.setup.outputs.deb_pkg_renamed }}  | awk '{print $1}')')

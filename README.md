@@ -42,11 +42,11 @@ DATABASE_URL=./development.sqlite
 
 TODO: Don't compile this into production
 
-### Feature wishlist / Yet to implement
+### To do
 
 #### Priority: High
 
-- [ ] Goal steps to completion
+- [ ] Add Github Actions
 
 #### Priority: Medium
 
@@ -55,15 +55,12 @@ TODO: Don't compile this into production
 - [ ] Start implementing tests
 - [ ] Start implementing localization
 - [ ] Handle invalid config file
-- [ ] Focus trap for modal
 - [ ] Support Mouse Back button where applicable
 - [ ] Dropdown button for remind interval select
 
 #### Priority: Low
 
-- [ ] Add Eslint
-- [ ] Do processing on success reflection input
-- [ ] Add Github Actions
+- [ ] Goal steps to completion
 - [ ] Manual track progress for goal
 - [ ] Special window decoration based on platform
 - [ ] Switch for enabling/disabling reminder
@@ -84,6 +81,6 @@ TODO: Don't compile this into production
 - [ ] Selectable display types for goel track history (horizontal, vertical, thread)
 - [ ] Convert db and tauri command errors to an error type that supports previous errors
 
-### Ideas
+#### Ideas
 
 - Display quotes from literature about reaching your goals when finishing the tracking

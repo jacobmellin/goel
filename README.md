@@ -1,4 +1,4 @@
-# Goel
+# Goel (WIP)
 
 Goel is a little tool that helps you keep track of your life goals.
 
@@ -46,15 +46,18 @@ TODO: Don't compile this into production
 
 #### Priority: High
 
-- [ ] Add Github Actions
+- [ ] Make Goal editable in detail view
+- [ ] Remove "My progress and Barriers" if there is no progress yet"
+- [ ] Screen for no goals pending tracking on Track
+- [ ] 
 
 #### Priority: Medium
 
 - [ ] Ensure correct formatting for displayed reflections
-- [ ] Ensure appdata directory is created on first launch
+- [ ] Ensure appdata directory is created on first launch (use TDD)
 - [ ] Start implementing tests
 - [ ] Start implementing localization
-- [ ] Handle invalid config file
+- [ ] Handle invalid config file (use TDD)
 - [ ] Support Mouse Back button where applicable
 - [ ] Dropdown button for remind interval select
 

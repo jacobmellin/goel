@@ -42,19 +42,20 @@ jobs:
       # we run our rust tests before the webdriver tests to avoid testing a broken application
       - name: Cargo test
         uses: actions-rs/cargo@v1
+        working-directory: src-tauri
         with:
           command: test
-          args: --manifest-path src-tauri/Cargo.toml
 
       # build a release build of our application to be used during our WebdriverIO tests
       - name: Cargo build
         uses: actions-rs/cargo@v1
+        working-directory: src-tauri
         with:
           command: build
-          args: --release --manifest-path src-tauri/Cargo.toml
+          args: --release
 
       # install the latest stable node version at the time of writing
-      - name: Node v16
+      - name: Node v20
         uses: actions/setup-node@v2
         with:
           node-version: 20.x

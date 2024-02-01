@@ -44,9 +44,9 @@ TODO: Don't compile this into production
 
 ## Testing
 
-Before tests can be run, tauri-driver needs to be installed using `cargo install tauri-driver`. Also, you need to run `npm install` in the `webdriver/selenium` directory.
+Before tests can be run, tauri-driver needs to be installed using `cargo install tauri-driver`. Also, you need to run `npm install` in the `webdriver/webdriverio` directory.
 
-To run tests, change into the `webdriver/selenium` directory and run `npm test`.
+To run tests, change into the `webdriver/webdriverio` directory and run `npm test`.
 
 ### To do
 

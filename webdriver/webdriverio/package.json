@@ -1,0 +1,16 @@
+{
+    "name": "webdriverio",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "test": "wdio run wdio.conf.mjs"
+    },
+    "dependencies": {
+        "@wdio/cli": "^8.29.3"
+    },
+    "devDependencies": {
+        "@wdio/local-runner": "^8.29.3",
+        "@wdio/mocha-framework": "^8.29.3",
+        "@wdio/spec-reporter": "^8.29.3"
+    }
+}

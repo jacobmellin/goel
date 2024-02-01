@@ -1,0 +1,10 @@
+on:
+  push:
+    branches:
+      - main
+
+name: WebDriver
+
+jobs:
+  test:
+    name: WebDriverIO Test Runner

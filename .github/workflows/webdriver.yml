@@ -39,6 +39,9 @@ jobs:
         with:
           toolchain: stable
 
+      - name: Create dist dir
+        run: mkdir -p dist
+
       # we run our rust tests before the webdriver tests to avoid testing a broken application
       - name: Cargo test
         run: cargo test

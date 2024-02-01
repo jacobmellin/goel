@@ -1,4 +1,6 @@
 fn main() {
-    println!("cargo:rerun-if-changed=path/to/your/migration/dir/relative/to/your/Cargo.toml");
+    println!("cargo:rerun-if-changed=migrations");
+    println!("cargo:rerun-if-changed=dist");
+
     tauri_build::build()
 }

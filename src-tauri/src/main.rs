@@ -95,7 +95,7 @@ async fn main() {
 
     let tray = SystemTray::new().with_menu(tray_menu);
 
-    let app = tauri::Builder::default()
+    tauri::Builder::default()
         .system_tray(tray)
         .on_system_tray_event(|app, event| match event {
             SystemTrayEvent::LeftClick { .. } => {
@@ -158,5 +158,5 @@ async fn main() {
             commands::get_goal_reflections
         ])
         .run(tauri::generate_context!())
-        .expect("error while running tauri application");
+        .expect("Error running tauri application");
 }

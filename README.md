@@ -42,6 +42,12 @@ DATABASE_URL=./development.sqlite
 
 TODO: Don't compile this into production
 
+## Testing
+
+Before tests can be run, tauri-driver needs to be installed using `cargo install tauri-driver`. Also, you need to run `npm install` in the `webdriver/selenium` directory.
+
+To run tests, change into the `webdriver/selenium` directory and run `npm test`.
+
 ### To do
 
 #### Priority: High
@@ -49,15 +55,14 @@ TODO: Don't compile this into production
 - [ ] Make Goal editable in detail view
 - [ ] Remove "My progress and Barriers" if there is no progress yet"
 - [ ] Screen for no goals pending tracking on Track
-- [ ] 
+- [ ] Start implementing tests
+- [ ] Ensure appdata directory is created on first launch (use TDD)
+- [ ] Handle invalid config file (use TDD)
 
 #### Priority: Medium
 
 - [ ] Ensure correct formatting for displayed reflections
-- [ ] Ensure appdata directory is created on first launch (use TDD)
-- [ ] Start implementing tests
 - [ ] Start implementing localization
-- [ ] Handle invalid config file (use TDD)
 - [ ] Support Mouse Back button where applicable
 - [ ] Dropdown button for remind interval select
 

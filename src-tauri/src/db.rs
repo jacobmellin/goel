@@ -25,7 +25,11 @@ pub fn establish_connection() -> Result<SqliteConnection, String> {
     let db_url_env = env::var("DATABASE_URL");
 
     let db_url: String = match db_url_env {
-        Ok(env_url) => env_url,
+        Ok(env_url) => 
+        {
+            println!("Loading database from {}", env_url);
+            env_url
+        }
         Err(_) => {
             let cfg: crate::config::GoelConfig = confy::load("goel", None).unwrap();
             cfg.db_dir.join("goel.sqlite").display().to_string()

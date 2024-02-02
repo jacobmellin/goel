@@ -40,7 +40,7 @@ jobs:
           toolchain: stable
 
       - name: Frontend build
-        run: npm run build
+        run: npm install && npm run build
 
       # we run our rust tests before the webdriver tests to avoid testing a broken application
       - name: Cargo test

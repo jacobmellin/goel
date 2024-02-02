@@ -78,6 +78,4 @@ jobs:
       - name: WebdriverIO
         run: xvfb-run npm test
         working-directory: webdriver/webdriverio
-        env:
-          DATABASE_URL: ./test.sqlite
 

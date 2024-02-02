@@ -12,3 +12,8 @@ fn user_app_cache_created_when_init_db() {
 
     assert!(fs::metadata(db_dir).unwrap().is_dir());
 }
+
+// TODO
+// - User config does not exist
+// - User config has missing value
+// - User config has invalid format

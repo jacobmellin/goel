@@ -1,7 +1,7 @@
 use diesel::dsl::insert_into;
 use diesel::prelude::*;
 use dotenv::dotenv;
-use std::env;
+use std::{env, fs};
 
 pub mod models;
 pub mod schema;
@@ -32,6 +32,11 @@ pub fn establish_connection() -> Result<SqliteConnection, String> {
         }
         Err(_) => {
             let cfg: crate::config::GoelConfig = confy::load("goel", None).unwrap();
+            let db_dir = cfg.db_dir.display().to_string();
+           
+            // Create database dir if it doesn't exist
+            fs::create_dir_all(db_dir).unwrap();
+
             cfg.db_dir.join("goel.sqlite").display().to_string()
         }
     };

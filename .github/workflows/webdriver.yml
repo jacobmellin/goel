@@ -39,13 +39,14 @@ jobs:
         with:
           toolchain: stable
 
-      - name: Create dist dir
-        run: mkdir -p dist
+      - name: Frontend build
+        run: npm run build
 
       # we run our rust tests before the webdriver tests to avoid testing a broken application
       - name: Cargo test
         run: cargo test
         working-directory: src-tauri
+
 
       # build a release build of our application to be used during our WebdriverIO tests
       - name: Cargo build

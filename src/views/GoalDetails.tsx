@@ -5,7 +5,16 @@ import { GoalRecord } from "../types/Goal";
 import { For, createMemo, createResource } from "solid-js";
 import { invoke } from "@tauri-apps/api";
 
-function GoalReflection(props: any) {
+interface GoalReflectionRecord {
+    goal_id: string;
+    rating: string;
+    barriers_reflection: string;
+    success_reflection: string;
+    date_created: string;
+    skipped: boolean;
+}
+
+function GoalReflection(props: { reflection: GoalReflectionRecord }) {
     const happinessMap: { [key: number]: { text: string, class: string } } = {
         101: { text: "Very Happy", class: "text-green-300" },
         75:  { text: "Happy", class: "text-emerald-400" },
@@ -18,8 +27,8 @@ function GoalReflection(props: any) {
 
     const happinessText = createMemo(() => {
         for (const k of Object.keys(happinessMap).sort((a, b) => parseInt(a, 10) - parseInt(b, 10))) {
-            let n = parseInt(k, 10);
-            let m = parseInt(props.reflection.rating, 10);
+            const n = parseInt(k, 10);
+            const m = parseInt(props.reflection.rating, 10);
             if (m < n) {
                 return happinessMap[n];
             }

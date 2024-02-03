@@ -7,4 +7,4 @@ const [goals, { refetch }] = createResource<GoalRecord[]>(async () => {
     return JSON.parse(goals);
 });
 
-export function useGoals() { return [goals, refetch] as const };
+export function useGoals() { return [goals, refetch] as const }

@@ -2,7 +2,7 @@
 name = "goel"
 version = "0.0.0"
 description = "A Tauri App"
-authors = ["you"]
+authors = ["Jacob Mellin"]
 license = ""
 repository = ""
 edition = "2021"
@@ -10,10 +10,10 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-tauri-build = { version = "1.5", features = [] }
+tauri-build = { version = "1.5.1", features = [] }
 
 [dependencies]
-tauri = { version = "1.5", features = ["notification-all", "window-hide", "system-tray", "window-start-dragging", "process-exit", "shell-open", "custom-protocol"] }
+tauri = { version = "1.5.1", features = ["notification-all", "window-hide", "system-tray", "window-start-dragging", "process-exit", "shell-open", "custom-protocol"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 window-shadows = "0.2.2"

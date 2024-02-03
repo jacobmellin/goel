@@ -56,6 +56,7 @@ To run tests, change into the `webdriver/webdriverio` directory and run `npm tes
 
 #### Priority: High
 
+- [ ] Find out why app is not reloading anymore
 - [ ] Make Goal editable in detail view
 - [ ] Remove "My progress and Barriers" if there is no progress yet"
 - [ ] Screen for no goals pending tracking on Track

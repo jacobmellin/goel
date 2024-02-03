@@ -40,9 +40,13 @@ By default, Goel will use the user's AppCache directory for storing application 
 DATABASE_URL=./development.sqlite
 ```
 
-TODO: Don't compile this into production
-
 ## Testing
+
+### Rust
+
+Simply run `cargo test` in the `src-tauri` directory.
+
+### Frontend
 
 Before tests can be run, tauri-driver needs to be installed using `cargo install tauri-driver`. Also, you need to run `npm install` in the `webdriver/webdriverio` directory.
 
@@ -55,8 +59,6 @@ To run tests, change into the `webdriver/webdriverio` directory and run `npm tes
 - [ ] Make Goal editable in detail view
 - [ ] Remove "My progress and Barriers" if there is no progress yet"
 - [ ] Screen for no goals pending tracking on Track
-- [ ] Start implementing tests
-- [ ] Ensure appdata directory is created on first launch (use TDD)
 - [ ] Handle invalid config file (use TDD)
 
 #### Priority: Medium

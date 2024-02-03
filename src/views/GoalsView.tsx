@@ -1,7 +1,7 @@
 import { For, Show, createMemo } from "solid-js";
 import ButtonPrimary from "../components/ButtonPrimary";
 import Goal from "../components/Goal";
-import EmptyBg from "/src/assets/empty_bg.svg";
+import EmptyBg from "/src/assets/empty_bg.svg?component-solid";
 
 import { useGoals } from "../store/goals.ts";
 import { useAddGoalModal } from "../components/AddGoalModal.tsx";

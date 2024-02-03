@@ -27,7 +27,6 @@ pub fn establish_connection() -> Result<SqliteConnection, String> {
     let db_url: String = match db_url_env {
         Ok(env_url) => 
         {
-            println!("Loading database from {}", env_url);
             env_url
         }
         Err(_) => {

@@ -56,7 +56,6 @@ To run tests, change into the `webdriver/webdriverio` directory and run `npm tes
 
 #### Priority: High
 
-- [ ] Make Goal editable in detail view
 - [ ] Screen for no goals pending tracking on Track
 - [ ] Handle invalid config file (use TDD)
 

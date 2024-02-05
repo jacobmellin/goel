@@ -2,8 +2,9 @@ import { A, useParams } from "@solidjs/router";
 import EvaIcon from "../components/EvaIcon";
 import { useGoals } from "../store/goals";
 import { GoalRecord } from "../types/Goal";
-import { For, createMemo, createResource } from "solid-js";
+import { For, Show, createMemo, createResource } from "solid-js";
 import { invoke } from "@tauri-apps/api";
+import { useEditGoalModal } from "../components/EditGoalModal";
 
 interface GoalReflectionRecord {
     goal_id: string;
@@ -75,9 +76,19 @@ export default function GoalDetails() {
             </div>
             <div class="flex items-center justify-between">
                 <h1 class="text-xl font-light text-gaze-200">{goal()?.description}</h1>
-                <EvaIcon class="h-5 fill-calm-500" name="edit-2-outline" />
+                <button
+                    onClick={(e) => 
+                        {
+                            e.preventDefault();
+                            useEditGoalModal().open(goal() as GoalRecord);
+                        }
+                    }
+                    class="border-white/10 rounded border py-2 px-3 inline-flex hover:bg-orange-300/20 transition-colors items-center justify-content-center">
+                    <EvaIcon name="edit-2-outline" class="h-[18px] fill-orange-300/70" />
+                </button>
             </div>
         </div>
+        <Show when={goalReflections() !== 'undefined' && goalReflections()?.length > 0}>
         <h1 class="text-lg font-bold text-soothe-400 mt-3 mb-2 ml-0.5">My Progress and Barriers:</h1>
         <div class="grid md:grid-cols-2 gap-2">
             <For each={goalReflections()}>{(reflection) =>
@@ -85,5 +96,6 @@ export default function GoalDetails() {
             }
             </For>
         </div>
+        </Show>
     </div>;
 }

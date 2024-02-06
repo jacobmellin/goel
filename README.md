@@ -64,7 +64,6 @@ To run tests, change into the `webdriver/webdriverio` directory and run `npm tes
 - [ ] Ensure correct formatting for displayed reflections
 - [ ] Start implementing localization
 - [ ] Support Mouse Back button where applicable
-- [ ] Dropdown button for remind interval select
 
 #### Priority: Low
 

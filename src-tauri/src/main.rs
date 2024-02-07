@@ -5,8 +5,6 @@ mod config;
 mod db;
 mod commands;
 
-use config::GoelConfigExt;
-
 use tokio::{task, time};
 use diesel_migrations::{
     embed_migrations,
@@ -44,7 +42,7 @@ async fn remind_if_goals_pending(app_handle: &AppHandle) -> bool {
                     .show();
 
                 let window = app_handle.get_window("main").unwrap();
-                if config::GoelConfig::load().show_when_reminding && !window.is_visible().unwrap() {
+                if config::load().show_when_reminding && !window.is_visible().unwrap() {
                     window.show().unwrap();
                     app_handle.emit_to("main", "shown-after-remind", &goals.len()).unwrap();
                 }
@@ -69,7 +67,7 @@ fn init_pending_goal_reminder(app_handle: &AppHandle) {
 
         loop {
             interval.tick().await;
-            let remind_time = config::GoelConfig::load().remind_time;
+            let remind_time = config::load().remind_time;
             let today = chrono::Local::now().naive_local().date();
             let now = chrono::Local::now().time();
 

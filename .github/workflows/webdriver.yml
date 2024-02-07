@@ -36,7 +36,6 @@ jobs:
           libwebkit2gtk-4.0-dev
           webkit2gtk-driver
           xvfb
-          at-spi2-core
 
       # install the latest Rust stable
       - name: Rust stable

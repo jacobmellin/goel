@@ -1,5 +1,6 @@
 use crate::db;
 use crate::config;
+use crate::config::GoelConfigExt;
 
 
 #[tauri::command]
@@ -108,7 +109,7 @@ pub fn get_goal_reflections(goal_id: &str) -> String {
 
 #[tauri::command]
 pub fn get_settings() -> Result<String, String> {
-    let cfg = config::load();
+    let cfg = config::GoelConfig::load();
     match serde_json::to_string(&cfg) {
         Ok(v) => Ok(v),
         Err(err) => Err(err.to_string()),
@@ -119,7 +120,7 @@ pub fn get_settings() -> Result<String, String> {
 pub fn save_settings(settings: &str) -> Result<(), String> {
     match serde_json::from_str::<config::GoelConfigUpdate>(settings) {
         Ok(config) => {
-            config::merge(config);
+            config::GoelConfig::merge(config);
             Ok(())
         }
         Err(err) => Err(err.to_string()),

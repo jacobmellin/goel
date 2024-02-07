@@ -58,6 +58,7 @@ To run tests, change into the `webdriver/webdriverio` directory and run `npm tes
 
 - [ ] Screen for no goals pending tracking on Track
 - [ ] Handle invalid config file (use TDD)
+    - Implement --config console config param
 
 #### Priority: Medium
 
@@ -88,6 +89,7 @@ To run tests, change into the `webdriver/webdriverio` directory and run `npm tes
 - [ ] Automatic update
 - [ ] Selectable display types for goel track history (horizontal, vertical, thread)
 - [ ] Convert db and tauri command errors to an error type that supports previous errors
+- [ ] Make show when reminding configurable
 
 #### Ideas
 

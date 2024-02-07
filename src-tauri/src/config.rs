@@ -30,16 +30,24 @@ impl ::std::default::Default for GoelConfig {
     }
 }
 
-pub fn load() -> GoelConfig {
-    confy::load("goel", None).unwrap()
+pub trait GoelConfigExt {
+    fn load() -> GoelConfig;
+    fn merge(cfg: GoelConfigUpdate);
+    fn store(cfg: GoelConfig);
 }
 
-pub fn merge(cfg: GoelConfigUpdate) {
-    let mut saved_cfg = load();
-    saved_cfg.remind_time = cfg.remind_time.or(Some(saved_cfg.remind_time)).unwrap();
-    store(saved_cfg);
-}
+impl GoelConfigExt for GoelConfig {
+    fn load() -> GoelConfig {
+        confy::load("goel", None).unwrap()
+    }
 
-pub fn store(cfg: GoelConfig) {
-    confy::store("goel", None, cfg).unwrap();
+    fn merge(cfg: GoelConfigUpdate) {
+        let mut saved_cfg = GoelConfig::load();
+        saved_cfg.remind_time = cfg.remind_time.or(Some(saved_cfg.remind_time)).unwrap();
+        GoelConfig::store(saved_cfg);
+    }
+
+    fn store(cfg: GoelConfig) {
+        confy::store("goel", None, cfg).unwrap();
+    }
 }

@@ -16,6 +16,10 @@ jobs:
     # we want to run on the latest linux environment
     runs-on: ubuntu-latest
 
+    env:
+      WEBKIT_DISABLE_COMPOSITING_MODE: 1
+      NO_AT_BRIDGE: 1
+
     # the steps our job runs **in order**
     steps:
       # checkout the code on the workflow runner

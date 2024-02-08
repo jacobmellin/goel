@@ -1,4 +1,4 @@
-use std::path::PathBuf;
+use std::{fs, path::PathBuf};
 
 use chrono::NaiveTime;
 use serde::{Serialize, Deserialize};
@@ -31,7 +31,25 @@ impl ::std::default::Default for GoelConfig {
 }
 
 pub fn load() -> GoelConfig {
-    confy::load("goel", None).unwrap()
+    match confy::load("goel", None) {
+        Ok(config) => config,
+        Err(err) => {
+            match err {
+                confy::ConfyError::BadTomlData(_) => {
+                    let app_dirs = AppDirs::new(Some("goel"), false).unwrap();
+                    let mut config = app_dirs.config_dir.into_os_string();
+                    let mut config_renamed = config.clone();
+                    config.push("/default-config.toml");
+                    config_renamed.push("/default-config.toml-");
+                    let timestamp = chrono::Local::now();
+                    config_renamed.push(timestamp.format("%Y%m%d%H%M%S").to_string());
+                    fs::rename(config, config_renamed).unwrap();
+                    load()
+                },
+                _ => panic!("{}", err.to_string())
+            }
+        }
+    }
 }
 
 pub fn merge(cfg: GoelConfigUpdate) {

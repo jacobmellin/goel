@@ -1,0 +1,3 @@
+version = 0
+db_dir = '/home/jacob/.local/share/goel'
+remind_time = '16:30:00'

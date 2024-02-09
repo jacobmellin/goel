@@ -3,6 +3,7 @@ import GoalReflectForm from "../components/GoalReflectForm";
 import { invoke } from "@tauri-apps/api";
 import { useInfoBar } from "../components/InfoBar";
 import { GoalRecord } from "../types/Goal";
+import EmptyBg from "/src/assets/empty_bg_track.svg?component-solid";
 
 export default function TrackProgressView() {
     const infoBar = useInfoBar();
@@ -15,7 +16,12 @@ export default function TrackProgressView() {
     })
 
     return <div class="mt-4">
-        <Show when={typeof goals() !== 'undefined' && goals()!.length > 0}>
+        <Show when={typeof goals() !== 'undefined' && goals()!.length > 0} fallback={
+            <div class="w-full relative mt-8">
+                <EmptyBg class="max-w-xl max-h-[60vh] mx-auto block" />
+                <div class="text-center text-xl font-light text-soothe-400">No goals pending tracking!</div>
+            </div>
+        }>
             <h1 class="font-bold text-lg text-soothe-400">Track Goal Progress ({finishCount()}/{goals()?.length})</h1>
             <p class="text-sm text-calm-400">Please reflect on your progress with the following goals:</p>
             <For each={goals()}>

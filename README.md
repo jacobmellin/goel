@@ -58,19 +58,20 @@ To run tests, change into the `webdriver/webdriverio` directory and run `npm tes
 
 - [ ] Implement: Start with system setting
 - [ ] Changeable font size
+- [ ] Implement trash with restore and permanent delete
+- [ ] Switch for enabling/disabling reminder
+- [ ] Special window decoration based on platform
 
 #### Priority: Medium
 
+- [ ] Manual track progress for goal
 - [ ] Ensure correct formatting for displayed reflections
-- [ ] Start implementing localization
-- [ ] Support Mouse Back button where applicable
 
 #### Priority: Low
 
+- [ ] Start implementing localization
+- [ ] Support Mouse Back button where applicable
 - [ ] Goal steps to completion
-- [ ] Manual track progress for goal
-- [ ] Special window decoration based on platform
-- [ ] Switch for enabling/disabling reminder
 - [ ] Store all dates/times in UTC
 - [ ] Nice looking scroll bars cross platform
 - [ ] Display special screen after finishing tracking all pending goals
@@ -82,7 +83,6 @@ To run tests, change into the `webdriver/webdriverio` directory and run `npm tes
 - [ ] Add shortcuts handling
 - [ ] Close add goal modal on esc
 - [ ] Add tooltips
-- [ ] Implement trash with restore and permanent delete
 - [ ] Show some info regarding goal progress when finishing tracking a goal
 - [ ] Automatic update
 - [ ] Selectable display types for goel track history (horizontal, vertical, thread)

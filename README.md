@@ -56,8 +56,8 @@ To run tests, change into the `webdriver/webdriverio` directory and run `npm tes
 
 #### Priority: High
 
-- [ ] Screen for no goals pending tracking on Track
-- [ ] Handle invalid config file (use TDD)
+- [ ] Implement: Start with system setting
+- [ ] Changeable font size
 
 #### Priority: Medium
 
@@ -67,7 +67,6 @@ To run tests, change into the `webdriver/webdriverio` directory and run `npm tes
 
 #### Priority: Low
 
-- [ ] Set run on startup 
 - [ ] Goal steps to completion
 - [ ] Manual track progress for goal
 - [ ] Special window decoration based on platform

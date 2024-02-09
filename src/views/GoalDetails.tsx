@@ -67,7 +67,7 @@ export default function GoalDetails() {
 
     return <div class="pt-4">
         <A href="/" class="text-soothe-500 hover:text-soothe-400 transition-all uppercase text-wider flex gap-1 items-center justify-left"><EvaIcon class="h-5 -ml-0.5 fill-soothe-500" name="arrow-back" /> Go back</A>
-        <div class="border border-white/10 shadow-lg bg-gaze-700/50 mt-2 rounded-md px-4 py-4 flex-col justify-between items-center">
+        <div class="border border-white/10 shadow-lg bg-gaze-700/50 mt-5 rounded-md px-4 py-4 flex-col justify-between items-center">
             <div>
                 <p class="text-calm-400 text-wider uppercase">{
                     goal()?.tracking_freq === 'every' ?

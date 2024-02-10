@@ -19,7 +19,9 @@ export default function SettingsView() {
             <div class="flex gap-8">
                 <div class="">
                     <div class="text-gaze-400 mb-1 mx-0.5 relative text-sm font-bold">Enable reminder</div>
-                    <Switch onChange={() => {}} initialValue={false} />
+                    <Switch onChange={(value) => {
+                        invoke("set_reminder_enabled", { enabled: JSON.stringify(value) }); 
+                    }} initialValue={false} />
                 </div>
                 <Show when={settings()}>
                     <TimePicker label="Remind time" initialTime={settings()?.remind_time} onChange={async (v) => {

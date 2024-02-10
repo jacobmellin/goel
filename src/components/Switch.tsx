@@ -17,10 +17,10 @@ export default function Switch(props: SwitchProps) {
             "bg-soothe-400": checked() ,
             "bg-gaze-800": !checked()
         }}>
-            <span class="w-3.5 h-3.5 absolute transition-all top-[2px] left-[2px] block bg-soothe-400 rounded-full"
+            <span class="w-3.5 h-3.5 absolute transition-all top-[2px] block rounded-full"
                 classList={{ 
                     "bg-gaze-800 left-[22px]": checked(),
-                    "bg-soothe-400": !checked()
+                    "bg-soothe-400 left-[2px]": !checked()
                 }} 
             ></span>
             </div>

@@ -70,8 +70,9 @@ fn init_pending_goal_reminder(app_handle: &AppHandle) {
             let remind_time = config::load().remind_time;
             let today = chrono::Local::now().naive_local().date();
             let now = chrono::Local::now().time();
+            let cfg = config::load();
 
-            if (last_remind < today) && (now >= remind_time) {
+            if (last_remind < today) && (now >= remind_time) && cfg.enable_reminder  {
                 remind_if_goals_pending(&app_handle_).await;
                 last_remind = chrono::Local::now().naive_local().date();
             }
@@ -155,7 +156,8 @@ async fn main() {
             commands::create_goal_reflection,
             commands::get_settings,
             commands::save_settings,
-            commands::get_goal_reflections
+            commands::get_goal_reflections,
+            commands::set_reminder_enabled
         ])
         .run(tauri::generate_context!())
         .expect("Error running tauri application");

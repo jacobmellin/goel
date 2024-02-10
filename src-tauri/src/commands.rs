@@ -39,8 +39,7 @@ pub fn new_goal(goal_json: &str) -> Result<String, String> {
         Ok(rows) => rows,
     };
 
-    Ok("Success".into())
-}
+    Ok("Success".into()) }
 
 #[tauri::command]
 pub fn get_goal(goal_id: &str) -> Result<String, String> {
@@ -124,4 +123,11 @@ pub fn save_settings(settings: &str) -> Result<(), String> {
         }
         Err(err) => Err(err.to_string()),
     }
+}
+
+#[tauri::command]
+pub fn set_reminder_enabled(enabled: &str) -> Result<(), String> { let mut cfg = config::load();
+    cfg.enable_reminder = serde_json::from_str(enabled).unwrap();
+    config::store(cfg);
+    Ok(())
 }

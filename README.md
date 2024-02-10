@@ -56,10 +56,10 @@ To run tests, change into the `webdriver/webdriverio` directory and run `npm tes
 
 #### Priority: High
 
+- [ ] Write test for enable/disable reminder switch
 - [ ] Implement: Start with system setting
 - [ ] Changeable font size
 - [ ] Implement trash with restore and permanent delete
-- [ ] Switch for enabling/disabling reminder
 - [ ] Special window decoration based on platform
 
 #### Priority: Medium

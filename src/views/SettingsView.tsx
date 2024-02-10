@@ -3,6 +3,7 @@ import TimePicker from "../components/TimePicker";
 import { useSettings } from "../store/settings";
 import { Show } from "solid-js";
 import { useInfoBar } from "../components/InfoBar";
+import Switch from "../components/Switch";
 
 export default function SettingsView() {
     const [settings, refetchSettings] = useSettings();
@@ -15,9 +16,13 @@ export default function SettingsView() {
                 <p class="text-calm-400 font-bold">Track Progress Reminder</p>
                 <p class="text-gaze-400 text-sm max-w-sm">Goel will automatically remind you of goals for which reflection on your progress is due at a time set here.</p>
             </div>
-            <div class="flex">
+            <div class="flex gap-8">
+                <div class="">
+                    <div class="text-gaze-400 mb-1 mx-0.5 relative text-sm font-bold">Enable reminder</div>
+                    <Switch onChange={() => {}} initialValue={false} />
+                </div>
                 <Show when={settings()}>
-                    <TimePicker label="Remind time" initialTime={settings()?.remind_time} labelRight onChange={async (v) => {
+                    <TimePicker label="Remind time" initialTime={settings()?.remind_time} onChange={async (v) => {
                         try {
                             await invoke('save_settings', {
                                 settings: JSON.stringify({

@@ -5,8 +5,10 @@ import { Show } from "solid-js";
 import { useInfoBar } from "../components/InfoBar";
 import Switch from "../components/Switch";
 import NumberInput from "../components/NumberInput";
+import { useFontSize } from "../store/fontSize";
 
 export default function SettingsView() {
+    const [fontSize,] = useFontSize();
     const [settings, refetchSettings] = useSettings();
     const infoBar = useInfoBar();
     refetchSettings();
@@ -46,9 +48,11 @@ export default function SettingsView() {
                 <p class="text-gaze-400 text-sm max-w-xs">Size of fonts throughout this Application</p>
             </div>
             <div>
-                <p class="text-calm-400 font-bold"><NumberInput onChange={(v) => {
-                   invoke('set_font_size', { fontSize: JSON.stringify(v) });
-                }} min={12} max={18} initialValue={12} label="Font size (px)" /></p>
+                <Show when={typeof fontSize() !== 'undefined'}>
+                    <p class="text-calm-400 font-bold"><NumberInput onChange={(v) => {
+                       invoke('set_font_size', { fontSize: JSON.stringify(v) });
+                    }} min={12} max={18} default={fontSize()} label="Font size (px)" /></p>
+                </Show>
             </div>
         </div>
     </div>;

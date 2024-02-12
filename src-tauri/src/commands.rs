@@ -131,3 +131,17 @@ pub fn set_reminder_enabled(enabled: &str) -> Result<(), String> { let mut cfg =
     config::store(cfg);
     Ok(())
 }
+
+#[tauri::command]
+pub fn get_font_size() -> Result<u8, String> {
+    let cfg = config::load();
+    Ok(cfg.font_size)
+}
+
+#[tauri::command]
+pub fn set_font_size(font_size: &str) -> Result<(), String> {
+    let mut cfg = config::load();
+    cfg.font_size = serde_json::from_str(font_size).unwrap();
+    config::store(cfg);
+    Ok(())
+}

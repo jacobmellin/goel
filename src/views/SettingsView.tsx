@@ -4,6 +4,7 @@ import { useSettings } from "../store/settings";
 import { Show } from "solid-js";
 import { useInfoBar } from "../components/InfoBar";
 import Switch from "../components/Switch";
+import NumberInput from "../components/NumberInput";
 
 export default function SettingsView() {
     const [settings, refetchSettings] = useSettings();
@@ -45,7 +46,9 @@ export default function SettingsView() {
                 <p class="text-gaze-400 text-sm max-w-xs">Size of fonts throughout this Application</p>
             </div>
             <div>
-                <p class="text-calm-400 font-bold">Coming soon</p>
+                <p class="text-calm-400 font-bold"><NumberInput onChange={(v) => {
+                   invoke('set_font_size', { fontSize: JSON.stringify(v) });
+                }} min={12} max={18} initialValue={12} label="Font size (px)" /></p>
             </div>
         </div>
     </div>;

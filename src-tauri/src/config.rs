@@ -15,7 +15,8 @@ pub struct GoelConfig {
     pub db_dir: PathBuf,
     pub remind_time: chrono::NaiveTime,
     pub enable_reminder: bool,
-    pub show_when_reminding: bool
+    pub show_when_reminding: bool,
+    pub font_size: u8
 }
 
 impl ::std::default::Default for GoelConfig {
@@ -27,7 +28,8 @@ impl ::std::default::Default for GoelConfig {
             db_dir: app_dirs.data_dir,
             remind_time: NaiveTime::from_hms_opt(16,30,00).unwrap(),
             show_when_reminding: true,
-            enable_reminder: true
+            enable_reminder: true,
+            font_size: 14
         }
     }
 }

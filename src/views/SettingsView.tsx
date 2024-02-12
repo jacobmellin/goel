@@ -8,7 +8,7 @@ import NumberInput from "../components/NumberInput";
 import { useFontSize } from "../store/fontSize";
 
 export default function SettingsView() {
-    const [fontSize,] = useFontSize();
+    const [fontSize, refetchFontSize] = useFontSize();
     const [settings, refetchSettings] = useSettings();
     const infoBar = useInfoBar();
     refetchSettings();
@@ -51,7 +51,8 @@ export default function SettingsView() {
                 <Show when={typeof fontSize() !== 'undefined'}>
                     <p class="text-calm-400 font-bold"><NumberInput onChange={(v) => {
                        invoke('set_font_size', { fontSize: JSON.stringify(v) });
-                    }} min={12} max={18} default={fontSize()} label="Font size (px)" /></p>
+                       refetchFontSize();
+                    }} min={14} max={18} default={fontSize()} label="Font size (px)" /></p>
                 </Show>
             </div>
         </div>

@@ -9,8 +9,20 @@ import TrackProgressView from "./views/TrackProgressView";
 import TrashView from "./views/TrashView";
 import SettingsView from "./views/SettingsView";
 import GoalDetails from "./views/GoalDetails";
+import { useFontSize } from "./store/fontSize";
+import { createEffect } from "solid-js";
+
 
 function Root() {
+    const [fontSize] = useFontSize();
+
+    createEffect(() => {
+        if(typeof fontSize() !== 'undefined') {
+            const fs = fontSize()!.toString(); 
+            document.querySelector("html")!.style.setProperty('--global-font-size', fs + "px");
+        }
+    });
+
     return <Router root={App}>
         <Route path="/" component={GoalsView} />
         <Route path="/goal/:goalId" component={GoalDetails} />

@@ -39,7 +39,7 @@ export default function Header() {
         <ul class="inline-flex gap-4 ml-8 relative -top-0.5">
             <NavItem href="/" iconName="star">goals</NavItem>
             <NavItem disabled={!goals()?.length} iconName="file-add" href="/track">Track</NavItem>
-            <NavItem disabled href="/trash" iconName="trash">Trash</NavItem>
+            <NavItem href="/trash" iconName="trash">Trash</NavItem>
             <NavItem href="/settings" iconName="settings-2">Settings</NavItem>
         </ul>
     </div>;

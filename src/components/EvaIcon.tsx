@@ -10,8 +10,8 @@ const SIZE = {
 
 interface EvaIconProps {
     fill?: string,
-    animation?: Object,
-    size?: string,
+    animation?: string,
+    size?: "small" | "medium" | "large" | "xlarge",
     name: string,
     class?: string
 }
@@ -36,7 +36,7 @@ export default function EvaIcon(props: EvaIconProps) {
         }
     }
 
-    setDims(updateDims(size));
+    setDims(updateDims(size || "small"));
 
     const config = {
         fill,

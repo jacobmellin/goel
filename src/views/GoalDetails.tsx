@@ -5,15 +5,7 @@ import { GoalRecord } from "../types/Goal";
 import { For, Show, createMemo, createResource } from "solid-js";
 import { invoke } from "@tauri-apps/api";
 import { useEditGoalModal } from "../components/EditGoalModal";
-
-interface GoalReflectionRecord {
-    goal_id: string;
-    rating: string;
-    barriers_reflection: string;
-    success_reflection: string;
-    date_created: string;
-    skipped: boolean;
-}
+import { GoalReflectionRecord } from "../types/GoalReflectionRecord";
 
 function GoalReflection(props: { reflection: GoalReflectionRecord }) {
     const happinessMap: { [key: number]: { text: string, class: string } } = {

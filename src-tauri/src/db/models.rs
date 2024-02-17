@@ -57,7 +57,7 @@ pub struct GoalNew<'a> {
     pub date_created: NaiveDateTime,
 }
 
-#[derive(Debug, Queryable, Serialize, Associations, Identifiable, PartialEq, Selectable)]
+#[derive(Debug, Clone, Queryable, Serialize, Associations, Identifiable, PartialEq, Selectable)]
 #[diesel(table_name = super::schema::goal_reflections)]
 #[diesel(check_for_backend(diesel::sqlite::Sqlite))]
 #[diesel(belongs_to(Goal))]
@@ -87,4 +87,10 @@ pub struct GoalReflectionNew<'a> {
     pub date_modified: Option<NaiveDateTime>,
     #[serde(default)]
     pub goal_id: &'a str,
+}
+
+#[derive(Debug, Serialize, Clone)]
+pub struct GoalWithReflections {
+    pub goal: Goal,
+    pub reflections: Vec<GoalReflection>
 }

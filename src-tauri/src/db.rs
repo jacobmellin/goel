@@ -134,3 +134,19 @@ pub fn insert_goal_rating(new_goal_reflection: GoalReflectionNew) -> Result<usiz
 
     if_err_to_string(result)
 }
+
+pub fn get_goals_with_reflections(removed: bool) -> Result<Vec<models::GoalWithReflections>, String> {
+    let connection = &mut establish_connection()?;
+    
+    let goals : Vec<GoalWithReflections> = schema::goals::dsl::goals.filter(schema::goals::dsl::is_removed.eq(removed))
+        .load::<Goal>(connection).unwrap().into_iter().map(|goal| {
+            let _goal = goal.clone();
+
+            GoalWithReflections {
+                goal: _goal,
+                reflections: get_goal_reflections(&goal.id).unwrap()
+            }
+        }).collect();
+
+    Ok(goals)
+}

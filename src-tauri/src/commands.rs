@@ -145,3 +145,12 @@ pub fn set_font_size(font_size: &str) -> Result<(), String> {
     config::store(cfg);
     Ok(())
 }
+
+#[tauri::command]
+pub fn get_removed_goals_with_reflections() -> String {
+    let goals = db::get_goals_with_reflections(true);
+    match goals {
+        Ok(goals) => serde_json::to_string(&goals).unwrap(),
+        Err(err) => err.to_string(),
+    }
+}

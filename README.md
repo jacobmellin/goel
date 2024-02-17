@@ -68,6 +68,7 @@ To run tests, change into the `webdriver/webdriverio` directory and run `npm tes
 - [ ] Manual track progress for goal
 - [ ] Ensure correct formatting for displayed reflections
 - [ ] Fix display of switch when changed font size
+- [ ] Fade gradients at top and bottom of scroll areas
 
 #### Priority: Low
 

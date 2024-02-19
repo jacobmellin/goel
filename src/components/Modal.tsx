@@ -14,7 +14,6 @@ export default function Modal(props: ModalProps) {
         if(props.visible) {
             modalRef.querySelector('input')?.focus();
             modalRef.showModal();
-            console.log("hello");
         } else {
             modalRef.close();
         }

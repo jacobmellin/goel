@@ -9,12 +9,13 @@ import { createStore } from "solid-js/store";
 import { createMemo } from "solid-js";
 import { Show } from "solid-js";
 import { useSettings } from "../../store/settings";
+import { onCleanup } from "solid-js";
 
 interface GoalFormProps {
     goal: Partial<GoalRecord>,
     onSubmit: (goal: Partial<GoalRecord>) => void,
     onCancel: () => void,
-    confirmLabel: string
+    confirmLabel: string,
 }
 
 interface TrackProgressOption {
@@ -36,6 +37,8 @@ const optionsFormat =
 
 
 export default function GoalForm(props: GoalFormProps) {
+    let formRef: HTMLFormElement;
+
     const [newGoal, setNewGoal] = createStore<Partial<GoalRecord>>(props.goal);
 
     const [trackProgressOpts,] = createStore<Array<TrackProgressOption>>(
@@ -83,8 +86,9 @@ export default function GoalForm(props: GoalFormProps) {
         return undefined;
     });
 
-    return <form onSubmit={(e) => {
-            e.preventDefault()
+    return <form ref={formRef!} onSubmit={(e) => {
+            e.preventDefault();
+            formRef.reset();
             props.onSubmit(newGoal); 
         }}>
             <div class="my-4">
@@ -113,9 +117,8 @@ export default function GoalForm(props: GoalFormProps) {
                 </div>
                 <Show when={newGoal.tracking_freq === 'every'}>
                     <div class="grow max-w-32">
-                        <NumberInput default={2} min={2} 
+                        <NumberInput default={props.goal.tracking_days_interval || 2} min={2} 
                                      max={365} label="Number of Days"
-                                     initialValue={props.goal.tracking_days_interval}
                                      onChange={
                                         (n) => setNewGoal({ tracking_days_interval: n })} />
                     </div>

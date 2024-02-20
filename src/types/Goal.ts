@@ -13,7 +13,12 @@ interface GoalRecord {
     date_modified: Date
 }
 
+interface GoalRecordSelectable extends GoalRecord {
+    selected?: boolean
+}
+
 export type {
     GoalRecord,
+    GoalRecordSelectable,
     TrackingInterval
 }

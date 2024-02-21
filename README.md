@@ -9,7 +9,7 @@ TODO: Image / Animated WebP
 - Goel lets you define your life goals and will remind you of them regularly at specified intervals.
 - It will regularly ask you what your barriers and achievements you had since the last reminder, so as to give you a sense of what is holding you back and what is facilitating your progress.
 
-Since possibly any tool can be used wrongly: Please do your own research on productivity and motivation and consult a mental health professional first if you're dealing with mental health issues and think that Goel can help you!
+Since possibly any tool can be used wrongly: Please do your own research on productivity and motivation and consult a mental health professional first if you're struggling with mental health issues and think that Goel can help you!
 
 ## Installation
 

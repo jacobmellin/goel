@@ -4,6 +4,7 @@ import { createResource } from "solid-js";
 interface Settings {
     remind_time: string;
     show_when_reminidng: boolean;
+    enable_reminder: boolean;
 }
 
 const [settings, { refetch }] = createResource<Settings>(async () => {

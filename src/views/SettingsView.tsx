@@ -1,7 +1,7 @@
 import { invoke } from "@tauri-apps/api";
 import TimePicker from "../components/TimePicker";
 import { useSettings } from "../store/settings";
-import { Show } from "solid-js";
+import { Show, createSignal } from "solid-js";
 import { useInfoBar } from "../components/InfoBar";
 import Switch from "../components/Switch";
 import NumberInput from "../components/NumberInput";
@@ -12,6 +12,7 @@ export default function SettingsView() {
     const [settings, refetchSettings] = useSettings();
     const infoBar = useInfoBar();
     refetchSettings();
+    const [enableReminder, setEnableReminder] = createSignal(settings()?.enable_reminder);
     return <div>
         <h1 class="my-4 text-lg font-bold text-soothe-400">Settings</h1>
         <div class="bg-gaze-700/50 my-4 rounded-md px-4 py-4 flex justify-between items-center">
@@ -22,9 +23,15 @@ export default function SettingsView() {
             <div class="flex gap-8">
                 <div class="">
                     <div class="text-gaze-400 mb-1 mx-0.5 relative text-sm font-bold">Enable reminder</div>
-                    <Switch initialValue={settings()?.enable_reminder || false} onChange={(value) => {
-                        invoke("set_reminder_enabled", { enabled: JSON.stringify(value) }); 
-                    }} />
+                        <Switch initialValue={enableReminder() || false} onChange={(value) => {
+                            try {
+                                invoke("set_reminder_enabled", { enabled: JSON.stringify(value) }); 
+                                setEnableReminder(value);
+                                refetchSettings();
+                            } catch (e: any) {
+                                infoBar.showError("Error enabling reminder: " + e.toString());
+                            }
+                        }} />
                 </div>
                 <Show when={settings()}>
                     <TimePicker label="Remind time" initialTime={settings()?.remind_time} onChange={async (v) => {

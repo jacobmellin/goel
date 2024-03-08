@@ -13,8 +13,10 @@ interface GoalRecord {
     date_modified: Date
 }
 
-interface GoalRecordSelectable extends GoalRecord {
-    selected?: boolean
+interface GoalRecordSelectable {
+    selected?: boolean,
+    reflections?: any,
+    goal: GoalRecord
 }
 
 export type {

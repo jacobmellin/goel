@@ -4,9 +4,11 @@ import EvaIcon from "../components/EvaIcon";
 import { invoke } from "@tauri-apps/api";
 import { GoalRecordSelectable } from "../types/Goal";
 import { createStore, produce } from "solid-js/store";
+import { useInfoBar } from "../components/InfoBar";
 
 export default function TrashView() {
     const [removedGoals, setRemovedGoals] = createStore<GoalRecordSelectable[]>([]);
+    const infoBar = useInfoBar();
 
     const fetchRemovedGoals = async () => {
         const res: string = await invoke("get_removed_goals_with_reflections");
@@ -35,38 +37,68 @@ export default function TrashView() {
     const numSelected = createMemo(() => {
         return removedGoals.filter((g: GoalRecordSelectable) => g.selected).length;
     });
-    
-    const deleteSingle = (id) => {
-        invoke("delete_goals_permanently", { ids: [id] });
+
+    const deleteSingle = (id: string) => {
+        try {
+            invoke("delete_goals_permanently", { ids: [id] });
+            infoBar.showInfo("Goal deleted");
+        } catch (e) {
+            infoBar.showError(`Error deleting goal: ${e}`);
+        }
         refetch();
     };
 
     const deleteSelected = () => {
         const ids = getSelected().map((g: GoalRecordSelectable) => g.goal.id);
-        invoke("delete_goals_permanently", { ids });
+        try {
+            invoke("delete_goals_permanently", { ids });
+            infoBar.showInfo("Goals deleted");} 
+        catch (e) {
+            infoBar.showError(`Error deleting goals: ${e}`);
+        }
         refetch();
     };
 
     const deleteAll = () => {
         const ids = removedGoals.map((g: GoalRecordSelectable) => g.goal.id);
-        invoke("delete_goals_permanently", { ids });
+        try {
+            invoke("delete_goals_permanently", { ids });
+            infoBar.showInfo("Goals deleted");} 
+        catch (e) {
+            infoBar.showError(`Error deleting goals: ${e}`);
+        }
         refetch();
     };
 
-    const restoreSingle = (id) => {
-        invoke("restore_deleted_goals", { ids: [id] });
+    const restoreSingle = (id: string) => {
+        try {
+            invoke("restore_deleted_goals", { ids: [id] });
+            infoBar.showInfo("Goal restored");
+        } catch (e) {
+            infoBar.showError(`Error restoring goal: ${e}`)
+        }
         refetch();
     };
 
     const restoreSelected = () => {
         const ids = getSelected().map((g: GoalRecordSelectable) => g.goal.id);
-        invoke("restore_deleted_goals", { ids });
+        try {
+            invoke("restore_deleted_goals", { ids });
+            infoBar.showInfo("Goals restored");} 
+        catch (e) {
+            infoBar.showError(`Error restoring goals: ${e}`);
+        }
         refetch();
     };
 
     const restoreAll = () => {
         const ids = removedGoals.map((g: GoalRecordSelectable) => g.goal.id);
-        invoke("restore_deleted_goals", { ids });
+        try {
+            invoke("restore_deleted_goals", { ids });
+            infoBar.showInfo("Goals restored");} 
+        catch (e) {
+            infoBar.showError(`Error restoring goals: ${e}`);
+        }
         refetch();
     };
 

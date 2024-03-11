@@ -162,3 +162,11 @@ pub fn delete_goals_permanently(ids: Vec<&str>) -> Result<(), String> {
         Err(err) => Err(err.to_string()),
     }
 }
+
+#[tauri::command]
+pub fn restore_deleted_goals(ids: Vec<&str>) -> Result<(), String> {
+    match db::restore_deleted_goals(ids) {
+        Ok(_) => Ok(()),
+        Err(err) => Err(err.to_string()),
+    }
+}

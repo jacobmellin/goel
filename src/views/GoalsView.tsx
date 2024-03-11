@@ -14,6 +14,8 @@ export default function GoalsView() {
         return typeof goals() !== 'undefined' && goals()!.length > 0;
     });
 
+    refetchGoals(); 
+
     return <>
         <div classList={{ hidden: !hasGoals() }} class="flex flex-row items-center justify-between relative z-1">
             <h1 class="my-4 text-lg font-bold text-soothe-400">My goals:</h1>

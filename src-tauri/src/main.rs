@@ -161,7 +161,8 @@ async fn main() {
             commands::set_font_size,
             commands::get_font_size,
             commands::get_removed_goals_with_reflections,
-            commands::delete_goals_permanently
+            commands::delete_goals_permanently,
+            commands::restore_deleted_goals
         ])
         .run(tauri::generate_context!())
         .expect("Error running tauri application");

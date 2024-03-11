@@ -55,16 +55,19 @@ export default function TrashView() {
 
     const restoreSingle = (id) => {
         invoke("restore_deleted_goals", { ids: [id] });
+        refetch();
     };
 
     const restoreSelected = () => {
         const ids = getSelected().map((g: GoalRecordSelectable) => g.goal.id);
         invoke("restore_deleted_goals", { ids });
+        refetch();
     };
 
     const restoreAll = () => {
         const ids = removedGoals.map((g: GoalRecordSelectable) => g.goal.id);
         invoke("restore_deleted_goals", { ids });
+        refetch();
     };
 
     const deselectAll = () => {

@@ -195,3 +195,22 @@ pub fn delete_goals_permanently(ids: Vec<&str>) -> Result<(), String> {
         Err(err) => Err(err.to_string()),
     }
 }
+
+pub fn restore_deleted_goals(ids: Vec<&str>) -> Result<(), String> {
+    let connection = &mut establish_connection()?;
+
+    let _ids = ids.clone();
+
+    let result = diesel::update(
+        schema::goals::dsl::goals
+            .filter(schema::goals::dsl::id.eq_any(&_ids))
+            .filter(schema::goals::dsl::is_removed.eq(true)),
+    )
+    .set(schema::goals::dsl::is_removed.eq(false))
+    .execute(connection);
+
+    match result {
+        Ok(_) => Ok(()),
+        Err(err) => Err(err.to_string()),
+    }
+}

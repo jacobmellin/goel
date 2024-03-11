@@ -13,9 +13,13 @@ export default function TrashView() {
         return JSON.parse(res).map((goal: GoalRecordSelectable) => { return { ...goal, selected: false } });
     };
 
-    fetchRemovedGoals().then((goals) => {
-        setRemovedGoals(goals);
-    });
+    const refetch = () => {
+        fetchRemovedGoals().then((goals) => {
+            setRemovedGoals(goals);
+        });
+    }
+
+    refetch();
 
     const setSelected = (goal: GoalRecordSelectable, selected: boolean) => {
         const idx = removedGoals.findIndex((g: GoalRecordSelectable) => g.goal.id === goal.goal.id);
@@ -34,16 +38,19 @@ export default function TrashView() {
     
     const deleteSingle = (id) => {
         invoke("delete_goals_permanently", { ids: [id] });
+        refetch();
     };
 
     const deleteSelected = () => {
         const ids = getSelected().map((g: GoalRecordSelectable) => g.goal.id);
         invoke("delete_goals_permanently", { ids });
+        refetch();
     };
 
     const deleteAll = () => {
         const ids = removedGoals.map((g: GoalRecordSelectable) => g.goal.id);
         invoke("delete_goals_permanently", { ids });
+        refetch();
     };
 
     const restoreSingle = (id) => {

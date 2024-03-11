@@ -154,3 +154,11 @@ pub fn get_removed_goals_with_reflections() -> String {
         Err(err) => err.to_string(),
     }
 }
+
+#[tauri::command]
+pub fn delete_goals_permanently(ids: Vec<&str>) -> Result<(), String> {
+    match db::delete_goals_permanently(ids) {
+        Ok(_) => Ok(()),
+        Err(err) => Err(err.to_string()),
+    }
+}

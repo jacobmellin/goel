@@ -25,14 +25,11 @@ pub fn establish_connection() -> Result<SqliteConnection, String> {
     let db_url_env = env::var("DATABASE_URL");
 
     let db_url: String = match db_url_env {
-        Ok(env_url) => 
-        {
-            env_url
-        }
+        Ok(env_url) => env_url,
         Err(_) => {
             let cfg: crate::config::GoelConfig = confy::load("goel", None).unwrap();
             let db_dir = cfg.db_dir.display().to_string();
-           
+
             // Create database dir if it doesn't exist
             fs::create_dir_all(db_dir).unwrap();
 
@@ -58,17 +55,20 @@ pub fn get_goals_pending_reflection() -> Result<Vec<Goal>, String> {
     let connection = &mut establish_connection()?;
     let goals = get_goals()?;
 
-    let pending_goals = goals.into_iter().filter(|goal| {
-        let newest_goal_reflection = GoalReflection::belonging_to(&goal)
-            .order_by(schema::goal_reflections::dsl::date_created.desc())
-            .first::<GoalReflection>(connection);
+    let pending_goals = goals
+        .into_iter()
+        .filter(|goal| {
+            let newest_goal_reflection = GoalReflection::belonging_to(&goal)
+                .order_by(schema::goal_reflections::dsl::date_created.desc())
+                .first::<GoalReflection>(connection);
 
-        if let Ok(newest_goal_reflection) = newest_goal_reflection {
-            goal.is_pending_reflection(Some(newest_goal_reflection.date_created))
-        } else {
-            goal.is_pending_reflection(None)
-        }
-    }).collect();
+            if let Ok(newest_goal_reflection) = newest_goal_reflection {
+                goal.is_pending_reflection(Some(newest_goal_reflection.date_created))
+            } else {
+                goal.is_pending_reflection(None)
+            }
+        })
+        .collect();
 
     Ok(pending_goals)
 }
@@ -92,15 +92,27 @@ pub fn insert_goal(new_goal: GoalNew) -> Result<usize, String> {
     if_err_to_string(result)
 }
 
-pub fn update_goal(goal_id: &str,  updated_goal: Goal) -> Result<(), String> {
+pub fn update_goal(goal_id: &str, updated_goal: Goal) -> Result<(), String> {
     let connection = &mut establish_connection()?;
 
     let goal = schema::goals::dsl::goals.find(goal_id);
 
-    diesel::update(goal).set(schema::goals::dsl::description.eq(updated_goal.description)).execute(connection).unwrap();
-    diesel::update(goal).set(schema::goals::dsl::tracking_freq.eq(updated_goal.tracking_freq)).execute(connection).unwrap();
-    diesel::update(goal).set(schema::goals::dsl::tracking_days_interval.eq(updated_goal.tracking_days_interval)).execute(connection).unwrap();
-    diesel::update(goal).set(schema::goals::dsl::date_modified.eq(chrono::Local::now().naive_local())).execute(connection).unwrap();
+    diesel::update(goal)
+        .set(schema::goals::dsl::description.eq(updated_goal.description))
+        .execute(connection)
+        .unwrap();
+    diesel::update(goal)
+        .set(schema::goals::dsl::tracking_freq.eq(updated_goal.tracking_freq))
+        .execute(connection)
+        .unwrap();
+    diesel::update(goal)
+        .set(schema::goals::dsl::tracking_days_interval.eq(updated_goal.tracking_days_interval))
+        .execute(connection)
+        .unwrap();
+    diesel::update(goal)
+        .set(schema::goals::dsl::date_modified.eq(chrono::Local::now().naive_local()))
+        .execute(connection)
+        .unwrap();
 
     Ok(())
 }
@@ -135,18 +147,51 @@ pub fn insert_goal_rating(new_goal_reflection: GoalReflectionNew) -> Result<usiz
     if_err_to_string(result)
 }
 
-pub fn get_goals_with_reflections(removed: bool) -> Result<Vec<models::GoalWithReflections>, String> {
+pub fn get_goals_with_reflections(
+    removed: bool,
+) -> Result<Vec<models::GoalWithReflections>, String> {
     let connection = &mut establish_connection()?;
-    
-    let goals : Vec<GoalWithReflections> = schema::goals::dsl::goals.filter(schema::goals::dsl::is_removed.eq(removed))
-        .load::<Goal>(connection).unwrap().into_iter().map(|goal| {
+
+    let goals: Vec<GoalWithReflections> = schema::goals::dsl::goals
+        .filter(schema::goals::dsl::is_removed.eq(removed))
+        .load::<Goal>(connection)
+        .unwrap()
+        .into_iter()
+        .map(|goal| {
             let _goal = goal.clone();
 
             GoalWithReflections {
                 goal: _goal,
-                reflections: get_goal_reflections(&goal.id).unwrap()
+                reflections: get_goal_reflections(&goal.id).unwrap(),
             }
-        }).collect();
+        })
+        .collect();
 
     Ok(goals)
+}
+
+pub fn delete_goals_permanently(ids: Vec<&str>) -> Result<(), String> {
+    let connection = &mut establish_connection()?;
+
+    let _ids = ids.clone();
+
+    let result1 = diesel::delete(
+        schema::goal_reflections::dsl::goal_reflections
+            .filter(schema::goal_reflections::dsl::goal_id.eq_any(&_ids)),
+    )
+    .execute(connection);
+
+    match result1 {
+        Ok(_) => {
+            let result2 = diesel::delete(
+                schema::goals::dsl::goals.filter(schema::goals::dsl::id.eq_any(&_ids)),
+            )
+            .execute(connection);
+            match result2 {
+                Ok(_) => Ok(()),
+                Err(err) => Err(err.to_string()),
+            }
+        }
+        Err(err) => Err(err.to_string()),
+    }
 }

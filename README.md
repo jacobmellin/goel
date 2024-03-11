@@ -56,15 +56,13 @@ To run tests, change into the `webdriver/webdriverio` directory and run `npm tes
 
 #### Priority: High
 
-- [ ] Implement trash with restore and permanent delete
-- [ ] Write test for enable/disable reminder switch
-- [ ] Implement: Start with system setting
 - [ ] Special window decoration based on platform
-- [ ] Character limit for goals descriptions and reflect input
-- [ ] Delete button in goal reflect view
 
 #### Priority: Medium
 
+- [ ] Implement: Start with system setting
+- [ ] Character limit for goals descriptions and reflect input
+- [ ] Delete button in goal reflect view
 - [ ] Manual track progress for goal
 - [ ] Ensure correct formatting for displayed reflections
 - [ ] Fix display of switch when changed font size

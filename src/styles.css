@@ -26,18 +26,20 @@
   background-color: rgba(25,30,50,0.99);
 
   @apply bg-gradient-to-b from-blue-900/30 to-purple-800/20;
-  @apply h-full;
-  @apply rounded-xl;
+  height:100%;
 }
 
 :root.special-decoration {
     position:absolute;
     border: 1px solid rgba(240,240,240,0.2);
+    box-sizing: border-box;
     top:5px;
     left:5px;
     right:5px;
     bottom:5px;
     box-shadow: 0 2px 7px rgba(0,0,0,0.5);
+    @apply rounded-xl;
+    height: auto;
 }
 
 button:focus {

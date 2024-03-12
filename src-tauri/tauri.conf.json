@@ -11,6 +11,9 @@
   },
   "tauri": {
     "allowlist": {
+      "os": {
+        "all": true
+      },
       "notification": {
         "all": true
       },

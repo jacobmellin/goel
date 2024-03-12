@@ -11,9 +11,19 @@ import SettingsView from "./views/SettingsView";
 import GoalDetails from "./views/GoalDetails";
 import { useFontSize } from "./store/fontSize";
 import { createEffect } from "solid-js";
-
+import { os } from "@tauri-apps/api";
 
 function Root() {
+    os.type().then((osType) => {
+        console.log(osType);
+
+        if(osType === 'Linux') {
+           // Detect window manager 
+           // TODO
+           // document.documentElement.classList.remove('special-decoration');
+        }
+    });
+
     const [fontSize] = useFontSize();
 
     createEffect(() => {

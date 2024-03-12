@@ -147,11 +147,13 @@ export default function TrashView() {
                             <EvaIcon name="checkmark-square-outline" fill="#FFF" class="w-6 h-6 fill-calm-400" />
                         </Show>
                     </button>
-                    <div>
-                    </div>
-                    <span class="flex-grow">
+                    <div class="flex-grow flex h-full items-center" onClick={() => {
+                        setSelected(goal, !goal.selected);
+                    }}>
+                    <span>
                         {goal.goal.description}
                     </span>
+                        </div>
                     <Button onClick={() => restoreSingle(goal.goal.id)}>Restore</Button>
                     <Button onClick={() => deleteSingle(goal.goal.id)}>Delete</Button>
                 </li>

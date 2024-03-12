@@ -30,7 +30,7 @@ export default function TextInput(props: TextInputProps) {
     });
 
     return <div>
-        <div class="text-gaze-400 mb-1 left-0.5 relative text-sm font-bold">{props.label}</div>
+        <div class="text-gaze-400 mb-1 mx-0.5 relative text-sm font-bold">{props.label}</div>
         <div class="relative">
             <input type="number" min={props.min} max={props.max} placeholder={props.placeholder} class="text-gaze-300 w-full bg-gaze-800 py-1 px-2 rounded border border-white/10 focus:outline-none box-border focus:border focus:border-orange-300 transition-colors hover:bg-gaze-700 placeholder-gaze-700 pr-10 shadow-inner" onChange={(e) => updateValue(e.target.value)} value={value()}></input>
             <div class="absolute right-1 top-0 h-full z-10 flex items-center">

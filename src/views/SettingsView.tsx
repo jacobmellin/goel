@@ -20,9 +20,9 @@ export default function SettingsView() {
                 <p class="text-calm-400 font-bold">Track Progress Reminder</p>
                 <p class="text-gaze-400 text-sm max-w-sm">Goel will automatically remind you of goals for which reflection on your progress is due at a time set here.</p>
             </div>
-            <div class="flex gap-8">
-                <div class="">
-                    <div class="text-gaze-400 mb-1 mx-0.5 relative text-sm font-bold">Enable reminder</div>
+            <div class="gap-8 flex flex-row">
+                <div class="flex gap-2 items-center justify-start">
+                <div class="text-gaze-400 mb-1 mx-0.5 relative text-sm font-bold">Enable reminder:</div>
                         <Switch initialValue={enableReminder() || false} onChange={(value) => {
                             try {
                                 invoke("set_reminder_enabled", { enabled: JSON.stringify(value) }); 
@@ -34,7 +34,7 @@ export default function SettingsView() {
                         }} />
                 </div>
                 <Show when={settings()}>
-                    <TimePicker label="Remind time" initialTime={settings()?.remind_time} onChange={async (v) => {
+                    <TimePicker label="Remind time:" labelRight initialTime={settings()?.remind_time} onChange={async (v) => {
                         try {
                             await invoke('save_settings', {
                                 settings: JSON.stringify({

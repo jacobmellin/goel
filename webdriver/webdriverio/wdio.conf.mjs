@@ -11,9 +11,8 @@ export const config = {
     capabilities: [{
         maxInstances: 1,
         'tauri:options': {
-            'application': '../../src-tauri/target/release/goel'
+            'application': '../../src-tauri/target/release/goel',
         },
-        browserName: 'wry',
     }],
     host: '127.0.0.1',
     port: 4444,

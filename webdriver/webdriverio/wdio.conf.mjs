@@ -13,9 +13,8 @@ export const config = {
         'tauri:options': {
             'application': '../../src-tauri/target/release/goel',
         },
+        browserName: "chrome"
     }],
-    host: '127.0.0.1',
-    port: 4444,
     reporters: ['spec'],
     framework: 'mocha',
     mochaOpts: {

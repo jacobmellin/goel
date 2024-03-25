@@ -15,13 +15,17 @@ TODO: Image / Animated WebP
 
 ## Installation
 
-### Windows & macOS
+### Windows 
 
-TODO
+Download the Installer from the Releases section and install it.
+
+### macOS
+
+Download the .dmg-file from the Releases section and move the contained Application to your Applications folder.
 
 ### Linux
 
-TODO
+Currently, there is only an AppImage and a Binary available for Linux. Download the package you would like to use from the Releases section and run it.
 
 ## Development
 

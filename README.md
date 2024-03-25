@@ -56,8 +56,8 @@ To run tests, change into the `webdriver/webdriverio` directory and run `npm tes
 
 #### Priority: High
 
-- [] Test on Windows/macOS
-- [] Open Window on tray icon left / double click
+- [ ] Test on Windows/macOS
+- [ ] Open Window on tray icon left / double click
 
 #### Priority: Medium
 
@@ -79,7 +79,6 @@ To run tests, change into the `webdriver/webdriverio` directory and run `npm tes
 - [ ] Display special screen after finishing tracking all pending goals
 - [ ] Make skip goal undoable
 - [ ] Advanced form validation
-- [ ] Font scale setting
 - [ ] Animations for everything
 - [ ] Add shortcuts handling
 - [ ] Close add goal modal on esc

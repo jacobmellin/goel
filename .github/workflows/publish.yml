@@ -13,7 +13,7 @@ env:
   DEPENDENCIES_RPM: "javascriptcoregtk4.0, webkit2gtk4.0, libxdo, libappindicator-gtk3, xdotool"
 jobs:
   setup:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     outputs:
       name: ${{ steps.get-package.outputs.name }}
       name_bin: ${{ steps.get-package.outputs.name }}-bin

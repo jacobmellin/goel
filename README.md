@@ -1,6 +1,6 @@
 # Goel (WIP)
 
-Goel is a little tool that helps you keep track of your life goals.
+Goel is a small tool that helps you keep track of your life goals.
 
 TODO: Image / Animated WebP
 

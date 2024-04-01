@@ -2,7 +2,7 @@
 
 Goel is a small tool that helps you keep track of your life goals.
 
-TODO: Image / Animated WebP
+![Goel Screenshot / Demo Video](./.github/GoelDemo.webp)
 
 ## Features
 
